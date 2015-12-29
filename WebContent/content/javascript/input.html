@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	window.onload=function(){
+		var btnApply=document.querySelector("#btn-applys");
+		btnApply.onclick=function(){
+			//alert("test");
+			
+			//1.라디오 버튼 목록을 얻자
+			var rds=document.querySelectorAll("input[type=radio]");
+			
+			//2.버튼 목록을 돌면서 선택된것을 찾기
+			var selected=null;
+			
+			for(var i in rds)
+			{
+				if(rds[i].checked)
+				{
+					selected=rds[i];
+					break;
+				}
+			}
+			
+			if(selected!=null)
+			{
+				var div=document.getElementById("show-room");
+				var img=document.createElement("img");
+				img.src='images/'+selected.value;
+				img.style.width="100px";
+				div.appendChild(img);
+			}
+		};
+		
+		var btnDel=document.querySelector("#btn-del");
+		btnDel.onclick=function(){
+			
+			var chks=document.querySelectorAll("input[type=checkbox]");
+			var sels=[];
+			var count=0;
+			
+			for(var i in chks)
+			{
+				if(chks[i].checked)
+				{
+					sels[count++]=chks[i];
+					
+				}
+			}
+			
+			var ul=document.querySelector("ul");
+			var lis=ul.querySelectorAll("li");  // 배열에 담긴것
+			
+			for(var i=0;i<sels.length;i++)
+			{
+				ul.removeChild(lis[sels[i].value]);  //li중 몇번째것인지 sels[i].value를 이용해 확인
+				
+			}
+			
+		};
+		
+		var btnApply1=document.querySelector("#btn-applys1");
+		btnApply1.onclick=function(){
+			var cb=document.querySelector("select");
+			if(cb.value=="none")
+				alert("이미지를 선택하세요")
+			else
+			{
+				var div=document.getElementById("show-room");
+				var img=document.createElement("img");
+				img.src='images/'+cb.value;
+				img.style.width="100px";
+				div.appendChild(img);
+			}
+		};
+}
+
+
+</script>
+
+</head>
+<body>
+	<h1>사진 갤러리</h1>
+	<select id="cb-img">
+		<option value="none">이미지 선택</option>
+		<option value="image1.jpg">img1</option>
+		<option value="image2.jpg">img2</option>
+		<option value="image3.jpg">img3</option>
+	</select>
+	<ul>
+		<li>
+			<img src="images/image1.jpg" style="width:100px;"/>
+			<input type="radio" name="img" value="image1.jpg"/>
+			<input type="checkbox" value="0"/>
+		</li>
+		<li>
+			<img src="images/image2.jpg" style="width:100px;"/>
+			<input type="radio" name="img" value="image2.jpg"/>
+			<input type="checkbox" value="1"/>
+		</li>
+		<li>
+			<img src="images/image3.jpg" style="width:100px;"/>
+			<input type="radio" name="img" value="image3.jpg"/>
+			<input type="checkbox" value="2"/>
+		</li>
+	</ul>
+	<div>
+		<input id="btn-applys" type="button" value="apply"/>
+		<input id="btn-del" type="button" value="delete"/>
+		<input id="btn-applys1" type="button" value="apply1"/>
+	</div>
+	<div id="show-room">
+		<!-- 선택된 사진이 나올 장소 -->
+	</div>
+</body>
+</html>

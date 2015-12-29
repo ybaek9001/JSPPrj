@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newlec.webprj.dao.NoticeFileDao">
+	<select id="getNoticeFiles" resultType="com.newlec.webprj.vo.NoticeFile">
+		SELECT * FROM NOTICEFILES WHERE NOTICECODE = #{noticeCode}
+	</select>
+		
+	<insert id="insert" parameterType="com.newlec.webprj.vo.NoticeFile">
+		<selectKey keyProperty="code" order="BEFORE" resultType="String">
+			SELECT ISNULL(MAX(CAST(CODE AS INT)), 0) CODE FROM NOTICEFILES	
+		</selectKey>
+		
+		INSERT INTO NOTICEFILES(code, src, noticeCode) VALUES(#{code}+1, #{src}, #{noticeCode})
+	</insert>
+	
+	
+</mapper>

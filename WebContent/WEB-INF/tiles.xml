@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	
+	<!-- 특화된 부분(index)은 *을 쓰기 전에 선언해줌으로써 올바르게 찾아지도록 한다 -->
+  <definition name="home/*" template="/WEB-INF/views/home/shared/layout.jsp">
+  	  <put-attribute name="header" value="/WEB-INF/views/shared/header.jsp" />
+      <put-attribute name="content" value="/WEB-INF/views/home/{1}.jsp" />
+      <put-attribute name="footer" value="/WEB-INF/views/shared/footer.jsp" />
+  </definition>
+  
+	<!-- definition부분의 별순서 첫번째,두번째 == put-attribute의 {1},{2} -->  
+  <definition name="*/*" template="/WEB-INF/views/{1}/shared/layout.jsp">
+  	  <put-attribute name="css" value="{2}.css" />
+  	  <put-attribute name="header" value="/WEB-INF/views/shared/header.jsp" />
+  	  <put-attribute name="aside" value="/WEB-INF/views/{1}/shared/aside.jsp" />
+      <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+      <put-attribute name="footer" value="/WEB-INF/views/shared/footer.jsp" />
+  </definition>
+  
+    
+</tiles-definitions>

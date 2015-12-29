@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	window.onload=function(){
+		
+		/* 프레임 얻는 방법 */
+		var iframe=document.getElementById("iframe");
+		//var iframe=document.frames[0];
+		
+		iframe.src="http://www.daum.net";
+		/* iframe.onclick=function(){
+			iframe.src="http://www.daum.net";
+		} */
+	}
+
+
+
+</script>
+
+</head>
+<body>
+	<div style="border:1px solid #494949; width:500px; height:300px;">
+	 	<iframe id="iframe" style="width:100%; height:100%; border:0px solid #fff;" src="frame.html"></iframe>
+	</div>
+</html>

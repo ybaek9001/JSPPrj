@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#container{
+	display:flex;
+	background:yellow;
+	height:500px;
+	width:400px;
+	/*flex-flow:row;  */       /*열로 가변길이 줌*/
+	/*flex-wrap:wrap;  */
+	flex-flow:column wrap;
+		
+}
+
+#container > div{
+	width:200px;
+	height:200px;
+	border:1px solid pink;
+	
+}
+
+
+
+
+</style>
+
+</head>
+<body>
+	<div id="container">
+			<div>A</div>
+			<div>B</div>
+			<div>C</div>
+			<div>D</div>
+	</div>
+</body>
+</html>

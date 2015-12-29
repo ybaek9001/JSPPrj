@@ -1,0 +1,320 @@
+@CHARSET "UTF-8";
+
+body{
+   font-family:돋움, Arial, sans-serif;
+   font-size:12px;
+   color: #979797;   
+}
+
+.content-container{
+   margin-left : auto; /* 왼쪽에 margin, 즉 오른쪽정렬 */
+   margin-right : auto; /* 오른쪽에 margin, 즉 왼쪽정렬 */
+   width : 960px;
+   height : inherit; /* 부모의 값을 상속 */
+   /* opacity : 0.5; 투명도 */   
+   position:relative;
+}
+
+.clearfix:after 
+{
+   /*after : 막내자식 - 가상의 자식을 만들어줌으로써 본문내용이 늘어나도 페이지 크기가 늘어나게 한다*/
+   content: ".";.
+   clear:both;
+   display: block;
+   height: 0px;
+   visibility: hidden;   
+}
+
+.hidden{
+   /* display:공간도 없앰 / visibility:공간은 존재하되 보이지만 않음 */
+   display: none; 
+   /* visibility: hidden; */ 
+}
+
+/* -- #header ----------------------------------------------------------- */
+#header{
+   min-height:70px;   
+}
+
+#logo{
+	position: absolute;
+	top: 23px;
+	left: 0px;
+}
+
+#main-menu{
+	border: 1px solid red;
+	display: inline-block;		/* 인라인블록은 영역을 아이템에맞게 지정 / 기본 영역은 라인전체를 차지하므로 반드시 지정해줘야함 */
+	
+	position: absolute;
+	top: 27px;
+	left: 200px;
+}
+
+	#main-menu > ul > li{
+	   float:left;
+	   padding-left: 24px;   
+	   background:url("../images/bg-main-menu-vsp.png") no-repeat 13px center;
+	}
+   
+   #main-menu > ul > li:FIRST-CHILD{
+      /* FIRST-CHILD:첫번째 자식에 대한 속성 */
+      padding-left:0px;
+      background: none;   
+   }
+
+   #main-menu > ul > li > a{
+      font-family:맑은 고딕, sans-serif;
+      font-size:15px;
+      font-weight:bold;
+      color: #000;
+      text-decoration:none;            
+   }
+   
+   #main-menu > ul > li > a:HOVER{
+      /* HOVER : 마우스 올렸을 때 */
+      text-decoration: underline;
+      color:red;
+   }
+
+#join-menu{
+	border: 1px solid red;
+	display: inline-block;
+	
+	position: absolute;
+	top: 20px;
+	right: 0px;
+}
+
+	#join-menu > ul > li{
+	   float: left;
+	   padding-left: 9px;
+	   background:url("../images/bg-main-menu-vsp.png") no-repeat 5px center;
+	}
+
+   #join-menu >
+    ul > li:FIRST-CHILD{
+      padding-left: 0px;
+      background: none;
+   }
+
+   #join-menu > ul > li > a{
+      font-family:맑은 고딕, sans-serif;
+      font-size:10px;
+      font-weight:bold;
+      color: inherit;
+      text-decoration: none;      
+   }
+  
+#member-menu{
+  	position: absolute;
+	top: 40px;
+	right: 0px;
+  }
+   
+#member-menu > ul > li{
+   float: left;
+   border: 1px solid red;
+   display: inline-block;
+}
+
+#lecture-search{
+	width:308px;
+	height:25px;
+	border:5px solid #8CBA34;   /* 경계선의 색상이므로 color를 따로 쓰지않음 */
+	
+	position: absolute;
+	top: 21px;
+	left: 468px;
+}
+
+/* 렉쳐서치 필드셋은 히든내용도 출력되므로 범위지정 */
+#lecture-search fieldset > label,
+#lecture-search fieldset > input{
+	display: block;		/* 출력방식 - 블록방식 */
+	float: left;		/* 적재방식 - 레프트 */
+}
+
+	#lecture-search label{
+		width:65px;
+		height:25px;
+		line-height:25px;		/* 줄높이 / 글높이 자동 중간정렬*/
+		font-weight: bold;		/* 폰트 가중치 */
+		text-indent: 5px;		/* 들여쓰기 */
+	}
+	
+	#lecture-search input{   
+	   width: calc(100% - 96px);	/* 222px; */
+	   height: 25px;
+	   border: 0px solid #fff;		/* 경계선 */
+	}
+	
+	#lecture-search input[type=submit]{   
+	   text-indent: -999px;
+	   cursor:pointer;
+	   overflow: hidden;
+	   border: 0px;
+	   width: 31px;
+	   height: 25px;
+	   background: url("../images/btn-zoom.png") no-repeat center;
+	   border-left: 1px solid #8CBA34;		/* 왼쪽경계선 / 경계선은 solid 필수 */
+	}
+
+
+/* -- #viusal ----------------------------------------------------------- */
+#visual{
+   height:171px;
+   background:#313131 url("../images/bg-visual.png") no-repeat center;
+   /* background:rgb(255,0,0); 10진수로 색표현 */
+   border-top : 6px solid #8CBA34; 
+   background-attachment:auto;
+   /* overflow: auto;    */
+}
+
+/* -- #body ----------------------------------------------------------- */
+#body{
+   min-height:300px;
+   border-top : 6px solid #8CBA34;
+   margin-top: 1px;      
+}
+
+   #body .content-container{
+      display : flex;
+      min-height : inherit;
+      
+      /* display: -ms-grid;
+      -ms-grid-rows : auto;
+      -ms-grid-columns : 205px 755px; */
+      background: url("../images/bg-body.png") repeat-y left top;
+   }
+
+/* -- #aside ----------------------------------------------------------- */
+#aside{
+   width:285px;
+   
+   /* -ms-grid-row:1;
+   -ms-grid-column:1; */
+   
+   /*float : left;
+    height:inherit;
+   width: 205px; */
+   background:url("../images/bg-aside-title.png") no-repeat left top;
+}
+
+#user-menu{
+	padding-top:  5px;
+}
+
+#recomend-site{
+	padding-top: 30px;
+}
+
+
+
+
+/* -- #main ----------------------------------------------------------- */
+#main{
+   width:720px;
+   padding-left: 25px;
+   padding-top: 35px;
+   
+   /* -ms-grid-row:1;
+   -ms-grid-column:2; */
+   
+   /* position : relative;
+   float : left;
+   margin-left : auto; 
+   height: inherit;
+   width : 755px; */
+   
+}
+
+   #main > h2{
+      font-family:맑은 고딕;
+      font-size:21px;
+      font-weight:bold;
+      color: #646464;
+      padding-left: 25px;
+      background:url("../images/icon-main-title.png") no-repeat left;      
+   }
+
+#notice-search input[type=submit]{
+   text-indent:-999px;
+   cursor:pointer;
+   border:0px;
+   width:49px;
+   height:23px;
+   background: url("../images/btn-search.png") no-repeat center;
+}
+
+.align-container{
+	background:yellow;
+	text-align: right;
+}
+
+.align-page{
+	background:yellow;
+	text-align: center;
+}
+
+
+#notices{
+	width: 720px;
+	border-top: 2px solid #8cba35;
+	table-layout: fixed;
+}
+
+#notices > thead > tr > th,
+#notices > tbody > tr > td{
+	height: 30px;
+	width: 100px;
+	line-height:30px;
+	text-align: center;
+	border-bottom: 1px solid #e9e9e9;
+	
+}
+
+#notices > thead > tr > th:nth-child(4n+1),
+#notices > tbody > tr > td:nth-child(4n+1){
+	width:60px;
+}
+
+#notices > thead > tr > th:nth-child(2),
+#notices > tbody > tr > td:nth-child(2){
+	width:400px;
+}
+
+#notices > tbody > tr > td:nth-child(2){
+	font-family: 'Poiret One';
+	text-align: left;
+	text-indent: 10px;
+	white-space: nowrap;	
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+
+
+#notices > thead > tr > th{
+	background: #f5f5f5 url("../images/bg-title-sp.png") no-repeat left center;
+}
+
+#notices > thead > tr > th:first-child{
+	background: #f5f5f5;
+}
+
+
+
+/* -- #footer ----------------------------------------------------------- */
+#footer{
+   height:100px;
+   background:#313131;
+}
+
+
+#test {
+   height: 50px;
+   width: 200px;
+   top: 100px;
+   left: 100px;
+   position: absolute;
+}

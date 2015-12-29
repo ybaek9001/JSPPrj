@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newlec.webprj.dao.MemberDao">
+	<select id="getMembers" resultType="com.newlec.webprj.vo.Member">
+		SELECT * FROM(
+			SELECT 
+				ROW_NUMBER() OVER (ORDER BY REGDATE DESC) NUM, 
+				MEMBERS. * FROM MEMBERS 
+			WHERE ${param2} LIKE '%${param3}%' 
+		) A 
+		WHERE NUM BETWEEN 1+( #{param1}-1)*10 AND #{param1}*10
+	</select>
+	
+	<update id="update">      
+        UPDATE MEMBERS SET NAME = #{name}, PWD = #{pwd} WHERE MID= #{mid}         
+    </update>
+	
+	<delete id="delete">
+      DELETE MEMBERS WHERE NAME = #{param1}
+    </delete>
+	
+	<insert id="insert">
+      INSERT INTO MEMBERS(MID, PWD, NAME) VALUES(#{mid}, #{pwd}, #{name})
+    </insert>
+	
+	<select id="getMember" resultType="com.newlec.webprj.vo.Member">
+    SELECT * FROM Members WHERE MID = #{mid}
+  	</select>
+	
+</mapper>

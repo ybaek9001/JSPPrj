@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>newlec</title>
+<link href="../css/reset.css" type="text/css" rel="stylesheet" />
+<link href="../css/style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+
+   <header id="header">
+      <div class="content-container">         
+                <h1 id="logo"> <img src="../images/logo.png" alt="newlecture"/> </h1>
+       
+      <section>
+         <h1 class="hidden">헤더</h1>
+
+         <nav id="main-menu">
+            <h1 class="hidden" >메인메뉴</h1>
+            <ul class="clearfix" >
+               <li><a href="">학습가이드</a></li>
+               <li><a href="">뉴렉과정</a></li>
+               <li><a href="">강좌선택</a></li>
+            </ul>
+         </nav>
+
+         <section id="lecture-search">
+            <h1 class="hidden">강좌 검색</h1>
+            <form id="lecture-search-form">
+               <fieldset>
+                  <legend class="hidden">강좌 검색 필드</legend>
+                  <label>과정검색</label> <input type="text" /> 
+                  <input type="submit" value="검색" />
+               </fieldset>
+            </form>
+         </section>
+
+         <nav id="join-menu">
+            <h1 class="hidden">회원메뉴</h1>
+            <ul class="clearfix" >
+               <li><a href="">HOME</a></li>
+               <li><a href="">로그인</a></li>
+               <li><a href="">회원가입</a></li>
+            </ul>
+         </nav>
+
+         <nav id="member-menu">
+            <h1 class="hidden">마이메뉴</h1>
+            <ul class="clearfix" >
+               <li><a href=""><img src="../images/txt-mypage.png" alt="마이페이지"/></a></li>
+               <li><a href=""><img src="../images/txt-customer.png" alt="고객센터"/></a></li>
+            </ul>
+         </nav>
+      </section>
+      </div>
+   </header>
+
+   <div id="visual">
+      <div class="content-container">      
+         
+      </div>               
+   </div>
+
+   <div id="body">
+      <div class="content-container clearfix">
+         <aside id="aside">
+            <h1>고객센터</h1>
+
+            <nav>
+               <h1 id="user-menu">고객센터메뉴</h1>
+               <ul>
+                  <li><a href="">공지사항</a></li>
+                  <li><a href="">1:1 고객문의</a></li>
+                  <li><a href="">학습안내</a></li>
+               </ul>
+            </nav>
+
+            <nav>
+               <h1 id="recomend-site">추천사이트</h1>
+               <ul>
+                  <li><a href="a">answeris</a></li>
+                  <li><a href="b">wc3</a></li>
+                  <li><a href="c">microsoft</a></li>
+               </ul>
+            </nav>
+         </aside>
+
+         <!-- main은 div로 구분하지 않고 본래의 h1,h2,h3의 서열을 그대로 냅두도록. -->
+         <main id="main">
+         <h2>공지사항</h2>
+
+			<div class="align-container">
+				<h3 class="hidden">공지사항 검색</h3>
+				<form id="notice-search">
+					<fieldset>
+						<legend class="hidden">공지사항 검색 필드</legend>
+						<label>분류</label>
+						<!-- select:콤보박스, option:콤보메뉴 -->
+						<select>
+							<option>분류선택</option>
+							<option>제목</option>
+							<option>작성자</option>
+						</select> <label>검색어</label> <input type="text" /> <input type="submit"
+							value="검색" />
+					</fieldset>
+				</form>
+			</div>
+			
+			<h3>공지사항 목록</h3>
+         <!-- thead:무조건 단일 사용/ tbody:중복가능,게시판의 공지사항부분과 글부분 나눌때 중복이 사용된다 -->
+         <table id="notices">
+            <thead>
+               <!-- <tr>은 테이블의 레코드 -->
+               <tr>
+                  <!-- <th>와  <td>는 같은 역할임. head를 강조하고 싶다면  <th> -->
+                  <th>번호</th>
+                  <th>제목</th>
+                  <th>작성자</th>
+                  <th>작성일</th>
+                  <th>조회수</th>
+               </tr>
+            </thead>
+
+            <tbody>
+               <tr>
+                  <td>1</td>
+                  <td>동해물과 WORLD SQUARE</td>
+                  <td>백두산</td>
+                  <td>2011-11-22</td>
+                  <td>2</td>
+               </tr>
+
+               <tr>
+                  <td>2</td>
+                  <td>마르고 닳도록</td>
+                  <td>유느님이</td>
+                  <td>2012-11-23</td>
+                  <td>3</td>
+               </tr>
+            </tbody>
+         </table>
+
+			<div class="align-page">
+				<h3 class="hidden">목록의 현재 위치</h3>
+				<p>1/1page</p>
+
+				<h3 class="hidden">페이지 번호</h3>
+				<p>1</p>
+			</div>
+
+			</main>
+         
+         <!-- <div style= "background:green; width:100px; height:100px; clear:left" >
+         test         
+         </div> -->
+         
+      </div>
+   </div>
+   </body>
+
+   <footer id="footer">
+      <div class="content-container">
+         <!-- <section>
+         <h1>사이트 정보</h1>
+
+         <section>
+            <h1>회사 정보</h1>
+            <dl>
+               <dt>주소:</dt>
+               <dd>서울시 동대문구</dd>
+               <dt>관리자 메일:</dt>
+               <dd>admin@naver.com</dd>
+               <dt>사업자 등록번호:</dt>
+               <dd>1234</dd>
+            </dl>
+         </section>
+
+         <section>
+            <h1>저작권 정보</h1>
+            <p>Copyright ⓒ newlecture.com</p>
+         </section>
+      </section> -->
+      </div>
+   </footer>
+   
+   
+   
+   
+</html>

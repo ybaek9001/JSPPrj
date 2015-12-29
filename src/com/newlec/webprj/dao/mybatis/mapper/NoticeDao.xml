@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.newlec.webprj.dao.NoticeDao">
+	<!-- <select id="getNotices" resultType="com.newlec.webprj.vo.Notice">
+		SELECT * FROM(
+			SELECT 
+				ROW_NUMBER() OVER (ORDER BY REGDATE DESC) NUM, 
+				NOTICES. * FROM NOTICES 
+			WHERE ${param2} LIKE '%${param3}%' 
+		) A 
+		WHERE NUM BETWEEN 1+( #{param1}-1)*10 AND #{param1}*10
+	</select> -->
+	
+	<select id="getNotice" resultType="com.newlec.webprj.vo.Notice">
+		SELECT * FROM NOTICES WHERE CODE = #{code}
+	</select>
+	
+	<select id="getPrevNotice" resultType="com.newlec.webprj.vo.Notice">
+		select top 1 * from notices 
+		where regdate &lt; (SELECT RegDate FROM NOTICES WHERE CODE = #{code})
+		order by regdate desc;
+	</select>
+	
+	<select id="getNextNotice" resultType="com.newlec.webprj.vo.Notice">
+		select top 1 * from notices 
+		where regdate &gt; (SELECT RegDate FROM NOTICES WHERE CODE = #{code})
+		order by regdate asc;
+	</select>
+	
+	
+	<select id="getLastCode" resultType="String">
+		SELECT ISNULL(MAX(CAST(CODE AS INT)),0) CODE FROM NOTICES
+	</select>
+	
+	<delete id="delete" parameterType="String">
+      DELETE NOTICES WHERE CODE = #{code}
+    </delete>
+	
+	<!-- <insert id="insert" parameterType="com.newlec.webprj.vo.Notice">
+		<selectKey keyProperty="code" order="BEFORE" resultType="String">
+			SELECT MAX(CAST(CODE AS INT)) CODE FROM NOTICES
+		</selectKey>	 
+		INSERT INTO NOTICES(code, title, content, writer) Values(#{code}+1,#{title},#{content},#{writer})
+	</insert> -->
+	
+	
+	
+	
+</mapper>

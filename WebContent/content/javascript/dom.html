@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	window.onload=function(){
+		var btnAddText=document.getElementById("btn-add-text");
+		btnAddText.onclick=function(){
+			
+			//var txt1=document.body.childNodes[0];
+			
+			//var txt1=document.body.getElementsByTagName("input")[0];
+			
+			//var txt1=document.querySelectorAll("input")[0];
+			//var txt1=document.querySelector("input:first-child");
+			//var txt1=document.querySelector("input[type=text]");
+			//txt1.value="hello";
+			
+			/* //1.src 텍스트 박스에서 사용자가 입력한 값을 imgRoute라는 변수에 참조시킨다.
+			var imgRoute=document.querySelector("input:first-child");
+			//2.그 값을 img 문서 객체의 src 속성에 대입한다
+			var img=document.querySelector("img");
+			
+			img.src=imgRoute.value;
+			img.style.width="200px"; */
+			
+			var div=document.querySelector("div");  // 공간확보
+			var txt=document.createTextNode("안녕하삼??");  // 자료 확보
+			div.appendChild(txt);  // 공간에 자료 넣기 
+			
+			
+		};
+		
+		var btnAddImg=document.getElementById("btn-add-img");
+		btnAddImg.onclick=function(){
+			
+			var div=document.querySelector("div");  // 공간확보
+			var img1=document.createElement("img");  // 자료 확보
+			img1.src="images/image1.jpg";
+			img1.style.width="200px";
+			div.appendChild(img1);  // 공간에 자료 넣기
+		}
+		
+		var btnDel=document.getElementById("btn-del");
+		btnDel.onclick=function(){
+			
+			var div=document.querySelector("div"); 
+			div.removeChild(div.lastChild);
+		}
+		
+		var btnClone=document.getElementById("btn-clone");
+		btnClone.onclick=function(){
+			
+			var div=document.querySelector("div"); 
+			document.body.appendChild(div.cloneNode(true)); 
+		}
+		
+		var btnReplace=document.getElementById("btn-replace");
+		btnReplace.onclick=function(){
+			
+			var divs=document.querySelectorAll("div");
+			var divFirst=divs[0];
+			//var divSecond=divs[1];
+			var divLast=divs[divs.length-1];
+			var divOld=document.body.replaceChild(divFirst, divLast);  // 삭제되는 요소가 반환됨
+			document.body.insertBefore(divOld, divFirst);  // 위에서 반환된 요소를 옮겨진 곳의 앞에다가 insert
+		}
+	};
+</script>
+
+
+</head>
+<body>
+	<input type="text" id="src"/>
+	<input id="btn-add-text" type="button" value="텍스트추가"/>
+	<input id="btn-add-img" type="button" value="이미지추가"/>
+	<input id="btn-clone" type="button" value="노드복제"/>
+	<input id="btn-del" type="button" value="막내삭제"/>
+	<input id="btn-replace" type="button" value="자리바꾸기"/>
+	
+	<div>
+		<img/>
+	</div>
+</body>
+</html>

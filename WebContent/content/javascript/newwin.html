@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript"> 
+ window.onload=function(){
+ 	var btn1=document.getElementById("btn1")
+ 	btn1.onclick=function(){
+ 		alert(window.opener);
+ 	};
+ 	
+ 	var btnMove=document.getElementById("btn-move");
+	btnMove.onclick=function(){
+		opener.moveTo(100,100);
+	};
+ 	
+ };
+</script>
+</head>
+<body>
+	<input id="btn1" type="button" value="click"/>
+	<input id="btn-move" type="button" value="move"/>
+</body>
+</html>
