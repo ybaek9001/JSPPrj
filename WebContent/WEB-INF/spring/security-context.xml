@@ -20,7 +20,7 @@
         	authentication-success-handler-ref="successHandler"
         	/>
         	<logout logout-success-url="/customer/notice"/>
-           <intercept-url pattern="/customer/noticeReg" access="ROLE_ADMIN"/>
+           <intercept-url pattern="/customer/noticeReg" access="ROLE_USER"/>
         </http>
         
         <!-- 인증을 위한 매니져 -->
@@ -31,7 +31,7 @@
               	users-by-username-query
               		="SELECT mid userid, pwd password, 1 enabled FROM Members WHERE mid=?"              		
               	authorities-by-username-query
-              	="SELECT mid userid, 'ROLE_ADMIN' authorities FROM Members WHERE mid=?"
+              	="SELECT mid userid, 'ROLE_USER' authorities FROM Members WHERE mid=?"
               />
               <!-- authorities : 역할정보 가져올 쿼리 -->
               

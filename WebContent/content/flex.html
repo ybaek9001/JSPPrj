@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+/* #container{
+	background: pink;
+	display: flex;
+	flex-flow: column;
+	flex-wrap: wrap;
+	height: 300px;
+	width:500px;
+} */
+body {
+	background: pink;
+	display: flex;
+	flex-flow: column;
+	flex-wrap: wrap;
+}
+
+#header {
+	background: skyblue;
+	height: 70px;
+}
+
+#visual {
+	background: yellow;
+	height: 100px;
+}
+
+#main {
+	background: green;
+	min-height: 300px;
+	display: flex;
+	flex-flow: row;
+}
+
+#aside {
+	background: beige;
+	width: 300px;
+}
+
+#body {
+	background: purple;
+	flex: 1;
+}
+
+#footer {
+	background: blue;
+	height: 100px;
+}
+
+@media only screen and (max-width:500px) {
+	#aside {
+		display: none;
+	}
+}
+</style>
+</head>
+
+<body>
+	<header id="header">header</header>
+	<div id="visual">visual</div>
+	<main id="main">
+	<div id="aside">aside</div>
+	<div id="body">body</div>
+	</main>
+	<footer id="footer">footer</footer>
+
+
+	<!-- <div id="container">
+		<div style = "background: red; width:200px; height:150px; order:1;">1</div>
+		<div style = "background: green; width:200px; height:100px; order:4;">2</div>
+		<div style = "background: blue; width:200px; height:150px; order:3;">3</div>
+		<div style = "background: yellow; width:200px; height:100px; order:2;">4</div>
+	</div> -->
+</body>
+
+</html>

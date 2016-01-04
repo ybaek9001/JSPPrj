@@ -28,6 +28,8 @@
 	</fieldset>
 </form>
 
+<script src="../content/js/ui.js"></script>
+
 <script>
    var datas; /* =[
          {code:1, title:'<b>자바스크립트 이란?</b>', writer:'waytogo'},
@@ -58,7 +60,7 @@
 		var btnWrite = document.querySelector("#btn-write");
 		btnWrite.onclick = function()
 		{
-			//전체 틀을 만들기 위한 설정
+			/* //전체 틀을 만들기 위한 설정
 			var dlg = document.createElement("div");
 			dlg.style.width = "100%";
 			dlg.style.height ="100%";
@@ -82,15 +84,73 @@
 			container.style.left = "300px";
 			
 			
+			document.body.appendChild(dlg);
+			
 			dlg.appendChild(screen);
 			dlg.appendChild(container);
+			 */
+		var dlg = showDialog(		// content\js\ui.js로 리펙토링한 곳 안에 있는 함수 호출
+				"noticeRegPartial",	//url
+				".btn-save", 	    //btn-selector
+				function(){			//btn-handler
+					//데이터 수집
+					var title = dlg.querySelector("input[name='title']").value;
+					//alert(title);
+					var content = dlg.querySelector("#txtContent").value;
+					//alert(content);
+					
+					var data = "title="+title+"&content="+content;//urlencoded
+					//-------------------------------------------------
+					var	request = new XMLHttpRequest();
+					
+					request.open("POST", "noticeReg", true); //true:비동기 방식
+					//----------------------------------------
+					request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+					request.setRequestHeader("Contnet-length", data.length);
+					request.setRequestHeader("Connection", "close");
+					//---------------------------------------
+					request.send(data); 
+							
+					request.onreadystatechange = function()
+					{
+						if (request.readyState == 4 && request.status == 200) 
+						{
+							if(request.responseText == "ok")
+							alert("성공");
+							
+							var page = event.target.innerText;	
+							
+							//-------------------XMLHttpRequest 준비---------------------//
+							var	request = new XMLHttpRequest();
+							
+							request.open("GET", "noticePartial?p=1", true); //true:비동기 방식
+							request.send(null); 
+									
+							request.onreadystatechange = function()
+							{
+								if (request.readyState == 4) 
+								{
+									//tbody의 안쪽 방을 비우기
+									//alert(request.responseText);
+									var tbody = document.querySelector("#notices tbody");
+									tbody.innerHTML=request.responseText;
+								}
+							}
+						}
+					} 
+					//---------------------------------------------
+					
+					//데이터 전송
+					
+					closeDialog(dlg);
+					return false;
+				});
 			
-			document.body.appendChild(dlg);
 			
 			
 	//---------------<<Ajax로 Form 추가하기>-------------------------------------------------//
 			
-			//-------------------XMLHttpRequest 준비---------------------//
+			/* //-------------------XMLHttpRequest 준비---------------------//
 			var	request = new XMLHttpRequest();
 			
 			request.open("GET", "noticeRegPartial", true); //true:비동기 방식
@@ -108,12 +168,18 @@
 						return false;
 					}
 				}
-			}
+			} 
 			//---------------------------------------------------------//
+			*/
 			return false;
 		}
 		
+		
+		
+		
+		
 		//---------------<Ajax GET Method>------------------------------//
+		//페이지 숫자 클릭하면 Ajax를 이용해서 해당부분만 바뀜
 		var nums = document.querySelectorAll("#pager-wrapper ul a");
 		
 		var numClick = function(event)

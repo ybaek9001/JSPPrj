@@ -137,10 +137,19 @@ public class CustomerController {
 		return "customer/noticeReg"; //GET요청을 처리할 View제공
 	}	
 	
+	@RequestMapping(value="noticeRegAjax")
+	public void noticeRegAjax(Notice n, PrintWriter out){
+		out.write("ok");
+		
+		out.write("fail");
+		
+	}
+	
 	@RequestMapping(value="noticeReg", method=RequestMethod.POST)
 	public String noticeReg(Notice n, Principal principal) throws SQLException{
 		/*String title, String content - post에서 넘겨준 value와 이름이 같다면 자동으로 담아준다.
 		System.out.printf("title : %s / content : %s", title, content);*/
+		
 		
 		n.setWriter(principal.getName()); //현재 로그인한 사용자의 이름		
 		noticeDao.insert(n);
