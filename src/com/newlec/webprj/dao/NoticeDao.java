@@ -29,5 +29,7 @@ public interface NoticeDao {
 	@Insert("INSERT INTO NOTICES(code, title, content, writer) Values(#{code}+1,#{title},#{content},#{writer})")
 	public int insert(Notice n) throws SQLException;
 	public String getLastCode();
+
+
 	
 }

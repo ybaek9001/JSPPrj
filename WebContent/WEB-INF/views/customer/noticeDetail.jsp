@@ -53,6 +53,7 @@
 
    <div class="article-content">
       <%-- <%=n.getContent()%> --%>
+      ${notice.content}
    </div>
 </div>
 <p class="article-comment margin-small">

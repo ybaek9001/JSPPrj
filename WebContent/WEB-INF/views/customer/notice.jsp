@@ -6,6 +6,12 @@
 <%@ taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 
+<script>
+	var param = {f:'${param.f}', q:'${param.q}'};
+	
+	if(param.f == "")
+		param.f="TITLE";
+</script>
 
 <h2>공지사항</h2>
 <h3 class="hidden">방문페이지 로그</h3>
@@ -16,15 +22,17 @@
 </ul>
 <h3 class="hidden">공지사항 목록</h3>
 <form id="content-searchform" class="article-search-form"
-	action="notice.jsp" method="get">
+	action="notice" method="get">
 	<fieldset>
 		<legend class="hidden"> 목록 검색 폼 </legend>
-		<input type="hidden" name="pg" value="" /> <label for="f"
-			class="hidden">검색필드</label> <select name="f">
-			<option value="TITLE">제목</option>
-			<option value="CONTENT">내용</option>
-		</select> <label class="hidden" for="q">검색어</label> <input type="text" name="q"
-			value="" /> <input type="submit" value="검색" />
+		<input type="hidden" name="pg" value="" /> 
+		<label for="f" class="hidden">검색필드</label> <select name="f">
+			<option value="TITLE" <c:if test="${param.f == 'TITLE'}"> selected="selected"</c:if>>제목</option>
+			<option value="CONTENT"<c:if test="${param.f == 'CONTENT'}"> selected="selected"</c:if>>내용</option>
+		</select> 
+		<label class="hidden" for="q">검색어</label> 
+		<input type="text" name="q" value="${param.q}" /> 
+		<input type="submit" value="검색" />
 	</fieldset>
 </form>
 
@@ -89,7 +97,7 @@
 			dlg.appendChild(screen);
 			dlg.appendChild(container);
 			 */
-		var dlg = showDialog(		// content\js\ui.js로 리펙토링한 곳 안에 있는 함수 호출
+			var dlg = showDialog(		// content\js\ui.js로 리펙토링한 곳 안에 있는 함수 호출
 				"noticeRegPartial",	//url
 				".btn-save", 	    //btn-selector
 				function(){			//btn-handler
@@ -189,7 +197,7 @@
 			//-------------------XMLHttpRequest 준비---------------------//
 			var	request = new XMLHttpRequest();
 			
-			request.open("GET", "noticePartial?p="+page, true); //true:비동기 방식
+			request.open("GET", "noticePartial?pg="+page+"&f="+param.f+"&q="+param.q, true); //true:비동기 방식
 			request.send(null); 
 					
 			request.onreadystatechange = function()
@@ -207,8 +215,8 @@
 			return false;
 		}
 		
-		for(var i=0; i<nums.length; i++)
-			nums[i].onclick=numClick;
+		 for(var i=0; i<nums.length; i++)
+			nums[i].onclick=numClick; 
 			
 		
 		var notices = document.getElementById("notices");
@@ -376,11 +384,11 @@
 			<a class="button btn-prev" href="notice.jsp">이전</a>
 		</p>
 		<ul>
-			<li><a class="strong" href="notice?p=1">1</a></li>
-			<li><a href="notice?p=2">2</a></li>
-			<li><a href="notice?p=3">3</a></li>
-			<li><a href="notice?p=4">4</a></li>
-			<li><a href="notice?p=5">5</a></li>
+			<li><a class="strong" href="notice?pg=1&f=${param.f}&q=${param.q}">1</a></li>
+			<li><a href="notice?p=2&f=${param.f}&q=${param.q}">2</a></li>
+			<li><a href="notice?p=3&f=${param.f}&q=${param.q}">3</a></li>
+			<li><a href="notice?p=4&f=${param.f}&q=${param.q}">4</a></li>
+			<li><a href="notice?p=5&f=${param.f}&q=${param.q}">5</a></li>
 		</ul>
 		<p id="btnNext">
 			<span class="button btn-next">다음</span>

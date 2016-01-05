@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+<!-- WebContent\content\flex-tablet.css로 링크해서 사용 가능(css관련된 미디어쿼리에 따른 뷰포트 사용) -->
+
 <style>
 
 /* #container{
@@ -11,7 +15,7 @@
 	flex-flow: column;
 	flex-wrap: wrap;
 	height: 300px;
-	width:500px;
+	width:400px;
 } */
 body {
 	background: pink;
@@ -28,6 +32,7 @@ body {
 #visual {
 	background: yellow;
 	height: 100px;
+	width:400px;
 }
 
 #main {
@@ -38,7 +43,7 @@ body {
 }
 
 #aside {
-	background: beige;
+	background: black;
 	width: 300px;
 }
 
@@ -50,6 +55,27 @@ body {
 #footer {
 	background: blue;
 	height: 100px;
+}
+
+/* Tablet & Desktop Device */
+@media all and (min-width:768px) {
+#aside {
+		background: red;
+	}
+}
+
+/* Tablet Device */
+@media all and (min-width:768px) and (max-width:1024px) {
+	#aside {
+		background: green;
+	}
+}
+
+/* Desktop Device */
+@media all and (min-width:1025px) {
+	#aside {
+		background: orange;
+	}
 }
 
 @media only screen and (max-width:500px) {

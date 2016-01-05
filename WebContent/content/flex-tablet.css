@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+@viewport{
+	width:auto;
+	zoom:1.0;
+	user-zoom;
+}
+
+@media all and (min-width:768px) and (max-width:1024px) {
+	#aside {
+		background: green;
+	}
+}

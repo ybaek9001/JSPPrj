@@ -32,10 +32,22 @@ public class CustomerController {
 	}*/
 
 	@RequestMapping("notice")
-	public String notice(PrintWriter out, Model model, HttpServletRequest request){
+	public String notice(PrintWriter out, Model model, HttpServletRequest request, String pg, String f, String q){
 		out.println("hello!!!!!!!!!!!!!!!!");
 		/*NoticeDao dao = new MyBatisNoticeDao();*/
-		List<Notice> list = noticeDao.getNotices(1, "Title","");
+		//List<Notice> list = noticeDao.getNotices(1, "Title","");
+		int page = 1;
+		String field = "TITLE";
+		String query = ""; 
+		
+		if(pg!=null && !pg.equals(""))
+			page=Integer.parseInt(pg);
+		if(f!=null && !f.equals(""))
+			field=f;
+		if(q!=null && !q.equals(""))
+			query=q;
+		
+		List<Notice> list = noticeDao.getNotices(page, field, query);
 		
 		
 		//다음 페이지로 request를 전달
@@ -59,12 +71,19 @@ public class CustomerController {
 	}
 	
 	@RequestMapping("noticePartial")
-	public String noticePartial(String p, Model model){
+	public String noticePartial(String pg,String f, String q, Model model){
 		int page = 1;
-		if(p!=null && !p.equals(""))
-			page = Integer.parseInt(p);
+		String field = "TITLE";
+		String query = ""; 
 		
-		List<Notice> list = noticeDao.getNotices(page, "TITLE", "");
+		if(pg!=null && !pg.equals(""))
+			page=Integer.parseInt(pg);
+		if(f!=null && !f.equals(""))
+			field=f;
+		if(q!=null && !q.equals(""))
+			query=q;
+		
+		List<Notice> list = noticeDao.getNotices(page, field, query);
 		
 		model.addAttribute("list", list);
 		
