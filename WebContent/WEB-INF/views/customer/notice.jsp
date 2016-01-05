@@ -21,12 +21,15 @@
 	<li>공지사항목록</li>
 </ul>
 <h3 class="hidden">공지사항 목록</h3>
-<form id="content-searchform" class="article-search-form"
-	action="notice" method="get">
+
+
+<!-- action처리를 notice자신이 하므로 아래 form의 param값들은 이 페이지에 그대로 전달되서 사용가능 -->
+<form id="content-searchform" class="article-search-form" action="notice" method="get">
 	<fieldset>
 		<legend class="hidden"> 목록 검색 폼 </legend>
 		<input type="hidden" name="pg" value="" /> 
-		<label for="f" class="hidden">검색필드</label> <select name="f">
+		<label for="f" class="hidden">검색필드</label> 
+		<select name="f">
 			<option value="TITLE" <c:if test="${param.f == 'TITLE'}"> selected="selected"</c:if>>제목</option>
 			<option value="CONTENT"<c:if test="${param.f == 'CONTENT'}"> selected="selected"</c:if>>내용</option>
 		</select> 
@@ -36,7 +39,10 @@
 	</fieldset>
 </form>
 
+
+<!-- ui.js에 버튼 눌렀을 때 반투명한 영역안에 원하는 폼 나오게하는 css와 function, 그리고 Ajax get방식 사용해서 데이터 불러오기 -->
 <script src="../content/js/ui.js"></script>
+
 
 <script>
    var datas; /* =[
@@ -64,7 +70,7 @@
    
 	window.onload = function() 
 	{
-		//---------------<Ajax POST Method>------------------------------//
+		//*****************************************<Ajax POST Method>*****************************************//
 		var btnWrite = document.querySelector("#btn-write");
 		btnWrite.onclick = function()
 		{
@@ -97,20 +103,18 @@
 			dlg.appendChild(screen);
 			dlg.appendChild(container);
 			 */
-			var dlg = showDialog(		// content\js\ui.js로 리펙토링한 곳 안에 있는 함수 호출
+			var dlg = showDialog(		// content\js\ui.js로 리펙토링한 곳 안에 있는 함수 호출하고 받는 리턴 값을 dlg에 저장
 				"noticeRegPartial",	//url
 				".btn-save", 	    //btn-selector
 				function(){			//btn-handler
 					//데이터 수집
-					var title = dlg.querySelector("input[name='title']").value;
-					//alert(title);
+					var title = dlg.querySelector("input[name='title']").value;	
 					var content = dlg.querySelector("#txtContent").value;
-					//alert(content);
-					
+				
 					var data = "title="+title+"&content="+content;//urlencoded
-					//-------------------------------------------------
-					var	request = new XMLHttpRequest();
 					
+					//------------------Ajax POST Method 사용-------------------------------
+					var	request = new XMLHttpRequest();
 					request.open("POST", "noticeReg", true); //true:비동기 방식
 					//----------------------------------------
 					request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -128,7 +132,7 @@
 							
 							var page = event.target.innerText;	
 							
-							//-------------------XMLHttpRequest 준비---------------------//
+							//-------------------XMLHttpRequest 준비--------------------//
 							var	request = new XMLHttpRequest();
 							
 							request.open("GET", "noticePartial?p=1", true); //true:비동기 방식
@@ -186,15 +190,16 @@
 		
 		
 		
-		//---------------<Ajax GET Method>------------------------------//
-		//페이지 숫자 클릭하면 Ajax를 이용해서 해당부분만 바뀜
+		//**************************************<Ajax GET Method>***********************************//
+		
+		
+				//--------------페이지 숫자 클릭하면 Ajax를 이용해서 해당부분만 바뀜---------------
 		var nums = document.querySelectorAll("#pager-wrapper ul a");
 		
 		var numClick = function(event)
 		{
 			var page = event.target.innerText;	
 			
-			//-------------------XMLHttpRequest 준비---------------------//
 			var	request = new XMLHttpRequest();
 			
 			request.open("GET", "noticePartial?pg="+page+"&f="+param.f+"&q="+param.q, true); //true:비동기 방식
@@ -210,18 +215,21 @@
 					tbody.innerHTML=request.responseText;
 				}
 			}
-			//---------------------------------------------------------//
 			
 			return false;
 		}
 		
-		 for(var i=0; i<nums.length; i++)
+		for(var i=0; i<nums.length; i++)
 			nums[i].onclick=numClick; 
-			
+				//--------------------------------------------------------------------
 		
+		
+		
+		
+	//---------------------------------------행복제와 행추가----------------------------------------//
 		var notices = document.getElementById("notices");
 
-		//-------------------------------행복제---------------------------------//
+		//-------------행복제-------------//
 		var btnRowClone = document.querySelector("input[value='행복제']");
 		btnRowClone.onclick = function() 
 		{
@@ -246,7 +254,7 @@
 			}
 		};
 		
-		//----------------------------------행추가--------------------------------//
+		//------------행추가-----------//
 		
 				/* XMLHttpRequest를 사용한 Ajax 프로그램은 다음과 같이 세 과정을 거치게 된다.
 		
