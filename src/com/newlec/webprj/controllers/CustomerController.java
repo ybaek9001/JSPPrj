@@ -48,14 +48,14 @@ public class CustomerController {
 			query=q;
 		
 		List<Notice> list = noticeDao.getNotices(page, field, query);
-		
+		int recordCount = noticeDao.getNoticeCount(field,query);
 		
 		//다음 페이지로 request를 전달
 		model.addAttribute("list", list);
 		/*model.addAttribute("n", list);*/
 		//request.setAttribute("list", list);
 		
-		
+		model.addAttribute("recordCount", recordCount);
 		
 		/*for(Notice n : list){
 			out.println("title : " + n.getTitle());
@@ -85,7 +85,9 @@ public class CustomerController {
 		
 		List<Notice> list = noticeDao.getNotices(page, field, query);
 		
+		
 		model.addAttribute("list", list);
+		
 		
 		return "/customer/noticePartial";
 		//return "/WEB-INF/views/customer/noticePartial.jsp";

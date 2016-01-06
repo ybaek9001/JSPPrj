@@ -30,6 +30,8 @@ public interface NoticeDao {
 	public int insert(Notice n) throws SQLException;
 	public String getLastCode();
 
+	public int getNoticeCount(String field, String query);
+
 
 	
 }

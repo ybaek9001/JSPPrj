@@ -14,6 +14,8 @@
 		WHERE NUM BETWEEN 1+( #{param1}-1)*10 AND #{param1}*10
 	</select> -->
 	
+	
+	
 	<select id="getNotice" resultType="com.newlec.webprj.vo.Notice">
 		SELECT * FROM NOTICES WHERE CODE = #{code}
 	</select>
@@ -46,7 +48,10 @@
 		INSERT INTO NOTICES(code, title, content, writer) Values(#{code}+1,#{title},#{content},#{writer})
 	</insert> -->
 	
-	
+	<select id="getNoticeCount" resultType="Integer">
+		SELECT COUNT(CODE) FROM NOTICES
+		WHERE ${param1} LIKE '%${param2}%' 
+	</select>
 	
 	
 </mapper>
