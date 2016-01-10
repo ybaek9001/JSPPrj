@@ -1,4 +1,4 @@
-.article-comment
+/* .article-comment
 {
 	text-align: right;
 }
@@ -6,9 +6,29 @@
 .btn-write
 {
 	text-align: left;
+} */
+
+.article-comment
+{
+   text-align: right;
+}
+
+.btn-write
+{
+   text-align: left;
+}
+
+#notices tbody{
+   overflow : hidden;
+   display:block;
+   position:relative;
+}
+
+#notices tbody tr{
+   /* position:absolute; */
 }
 
 #notices tbody tr:hover
 {
-	background:yellow
+   background:blue;
 }

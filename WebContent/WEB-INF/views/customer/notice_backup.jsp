@@ -38,20 +38,9 @@
    }
 
    window.onload=function(){
-     	
-	   //슬라이드 애니매이션 예제를 위한 초기화 코드
-	  	var table = document.querySelector("#notices");
-	  	table.style.height = table.clientHeight+"px";
-	  	
-	  	var tbody = document.querySelector("tbody");
-	  	tbody.style.height = tbody.clientHeight+"px";
-	  	
-	  
-	  	
-	   
-  	 /* =========이벤트 심화 예제============================================================================ */
-     /* =========이벤트 버블링과 캡쳐링============================================================================ */
-     //클릭 이벤트를 td에 설정. 로직은 tr의 배경색을 변경하기
+      /* =========이벤트 심화 예제============================================================================ */
+      /* =========이벤트 버블링과 캡쳐링============================================================================ */
+      //클릭 이벤트를 td에 설정. 로직은 tr의 배경색을 변경하기
 	 
 	var handler = function(event) {
 			//alert(event.currentTarget.nodeName + " clicked");
@@ -280,7 +269,6 @@
 
 		//--------------AJAX GET METHOD-----------------------//
 		var numClick = function(event) {
-				
 			/*---------------번호 선택 스타일 변경------------- */
 			var ul = event.target.parentNode.parentNode;
 			var as = ul.querySelectorAll("a");
@@ -302,85 +290,15 @@
 
 				if (request.readyState == 4) // operation is complete
 				{
-					
 					//tbody의 안쪽 방을 비우기
 					var tbody = document.querySelector("#notices tbody");
-					//tbody.innerHTML = request.responseText;
-					//alert(tbody.clientHeight);  tbody 높이:310 나옴
-					/* ##################애니메이션을 위한 예제######################## */
-					
-					//슬라이드를 위한 애니메이션
-					var table = document.querySelector("#notices");
-					//alert(table.clientHeight);
-					
-					//이부분은 미리 설정되어 있어야 할 정적인 스타일이므로 cotent폴더 안에있는 css파일에 옮김
-					//tbody.style.display="block";
-					//tbody.style.position = "relative";
-					
-					
-					//데이블 높이를 고정하는 것은 스크립트 최기화 블록으로 이동
-					//table.style.height = table.clientHeight+"px";
-					
-					//tbody.style.background = "yellow";
-					var trs = tbody.querySelectorAll("tr");
-					for(var i=0; i<trs.length; i++)
-						trs[i].style.position = "absolute";
-					
-					//trs[1].style.top="29px";
-					var top = 0;
-					var topId = setInterval(function(){
-						// 애니메이션을 위한 프레임 연산 //
-						top -= 1;
-						for(var i=0;i<trs.length;i++)
-							trs[i].style.top = (i*31) + top + "px";
-							
-						if(top<=-310)
-						{
-							clearInterval(topId);
-						}
-					},10);
-					
-					
-					
-					
-					/* 
-					//fade out을 위한 애니메이션
-					var v = 1;
-					var id = setInterval(function(){
-						// 애니메이션을 위한 프레임 연산 //
-						v -= 0.01;
-						tbody.style.opacity = v;
-						if(v<=0)
-						{
-							clearInterval(id);
-							
-							//문서를 대치하는 부분
-							tbody.innerHTML = request.responseText;
-							
-							//fade in을 위한 애니메이션
-							var v1 = 0;
-							var id1 = setInterval(function(){
-								// 애니메이션을 위한 프레임 연산 //
-								v1 += 0.01;
-								tbody.style.opacity = v1;
-								if(v1>=1)
-								{
-									clearInterval(id1);
-								}
-							},10);
-						}
-						
-					},10);				
-					*/
-					
-					//문서를 대치하는 부분
-					//tbody.innerHTML = request.responseText;
-					
-					
+
+					tbody.innerHTML = request.responseText;
 					
 					//alert(request.responseText);
 				}
 			};
+
 			request.open("GET", "noticePartial?pg=" + page + "&f=" + param.f
 					+ "&q=" + param.q, true); //false면 동기, true면 비동기식
 			page++;
@@ -392,7 +310,7 @@
 		var nums = document.querySelectorAll("#pager-wrapper ul a");
 		for (var i = 0; i < nums.length; i++) {
 			nums[i].onclick = numClick;
-		} 
+		}
 
 		var notices = document.getElementById("notices");
 
@@ -530,7 +448,7 @@
    </form>
    <table id="notices" class="article-list margin-small">
       <caption class="hidden">
-        	 공지사항
+         공지사항
       </caption>
       <thead>
          <tr>
@@ -541,17 +459,16 @@
             <th class="hit">조회수</th>
          </tr>
       </thead>
-      
       <tbody>
       <c:forEach var="n" items="${list}">
       <!-- n은 페이지 컨텍스트에 담겨져 있는 key name이지, 지역변수가 아님 만약 코드블록을 이용해서 사용하려면 pageContext를 호출해서 써야 되는거임 -->
-         <%-- <tr id="row-template" class="hidden">
+         <tr id="row-template" class="hidden">
             <td class="seq"></td>
             <td class="title"><a href="noticeDetail?c="></a></td>
             <td class="writer"></td>
-            <td class="regdate"><fmt:formatDate pattern="yyyy-MM-dd" value=""/></td>
+            <td class="regdate"><%-- <fmt:formatDate pattern="yyyy-MM-dd" value=""/> --%></td>
             <td class="hit"></td>
-         </tr> --%>
+         </tr>
          <tr>
             <td class="seq">${n.code}</td>
             <td class="title"><a href="noticeDetail?c=${n.code}">${n.title}</a></td>
@@ -603,8 +520,8 @@
    
    <div id="pager-wrapper" class="margin-small">
       <!-- 페이저가 포함됟 부분 -->
-     <%--  <my:pager lastNum="12"></my:pager>
-      <br /> --%>
+      <my:pager lastNum="12"></my:pager>
+      <br />
       <my:pager></my:pager>
    </div>
    
