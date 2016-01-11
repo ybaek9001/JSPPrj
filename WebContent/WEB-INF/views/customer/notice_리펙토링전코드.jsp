@@ -17,8 +17,6 @@
    
 </script>
 
-<script src="../content/customer/js/refactoring.js"></script>
-
 <script>
    /* var datas=[
                 {code:1, title:'<b>자바스크립트란?</b>', writer:'newlec'},
@@ -49,6 +47,7 @@
 	  	tbody.style.height = tbody.clientHeight+"px";
 	  	
 	  
+	  	
 	   
   	 /* =========이벤트 심화 예제============================================================================ */
      /* =========이벤트 버블링과 캡쳐링============================================================================ */
@@ -279,12 +278,9 @@
 
 		/* #########Pager 관련 스크립트####################################################### */
 
-		
-		var current = tbody.innerHTML;
 		//--------------AJAX GET METHOD-----------------------//
 		var numClick = function(event) {
-			
-			
+				
 			/*---------------번호 선택 스타일 변경------------- */
 			var ul = event.target.parentNode.parentNode;
 			var as = ul.querySelectorAll("a");
@@ -303,6 +299,7 @@
 
 			//비동기식으로 데이터 요청할 경우, 빈데이터가 오는걸 방지하기 위한 로직;데이터가 온 다음에 로직이 처리되도록 하기 위함
 			request.onreadystatechange = function() {
+
 				if (request.readyState == 4) // operation is complete
 				{
 					
@@ -313,16 +310,44 @@
 					/* ##################애니메이션을 위한 예제######################## */
 					
 					
-					//클릭한 게시글을 가져와서
-					tbody.innerHTML = current;
-					tbody.innerHTML += request.responseText;
-					current = request.responseText;
 					
+					
+					//클릭한 게시글을 가져와서
+					tbody.innerHTML += request.responseText;
 					
 					//슬라이드를 위한 애니메이션
-					//slideUp("#notices tbody", -200);
-					slideUp(tbody, -310);
-					//slideUp(tbody);
+					var table = document.querySelector("#notices");
+					//alert(table.clientHeight);
+					
+					//이부분은 미리 설정되어 있어야 할 정적인 스타일이므로 cotent폴더 안에있는 css파일에 옮김
+					//tbody.style.display="block";
+					//tbody.style.position = "relative";
+					
+					
+					//데이블 높이를 고정하는 것은 스크립트 최기화 블록으로 이동
+					//table.style.height = table.clientHeight+"px";
+					
+					//tbody.style.background = "yellow";
+					var trs = tbody.querySelectorAll("tr");
+					
+					for(var i=0; i<trs.length; i++)
+						trs[i].style.position = "absolute";
+					//trs[1].style.top="29px";
+					
+					//위로 슬라이드
+					var top = 0;
+					var topId = setInterval(function(){
+						// 애니메이션을 위한 프레임 연산 //
+						top -= 1;
+						for(var i=0;i<trs.length;i++)
+							trs[i].style.top = (i*31) + top + "px";
+						
+						console.log("top:" + top);
+						if(top<=-310)	//-100이 될때까지 스크롤
+						{
+							clearInterval(topId);
+						}
+					},10);
 					
 					
 					

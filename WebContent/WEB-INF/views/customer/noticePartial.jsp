@@ -4,13 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <c:forEach var="n" items="${list}">
-	<tr id="row-template" class="hidden">
+	<!-- <tr id="row-template" class="hidden">
 		<td class="seq"></td>
 		<td class="title"><a href="noticeDetail?c="></a></td>
 		<td class="writer"></td>
 		<td class="regdate"></td>
 		<td class="hit"></td>
-	</tr>
+	</tr> -->
 
 	<tr>
 		<td class="seq">${n.code}</td>
