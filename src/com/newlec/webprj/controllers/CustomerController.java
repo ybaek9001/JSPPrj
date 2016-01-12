@@ -56,6 +56,7 @@ public class CustomerController {
 		//request.setAttribute("list", list);
 		
 		model.addAttribute("recordCount", recordCount);
+		System.out.println(recordCount);
 		
 		/*for(Notice n : list){
 			out.println("title : " + n.getTitle());

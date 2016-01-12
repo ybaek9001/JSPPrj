@@ -6,3 +6,4 @@ window.addEventListener("load", function(){
 		img.style.opacity=0.5;
 	};
 });
+

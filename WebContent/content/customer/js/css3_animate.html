@@ -4,20 +4,49 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	
+	/* 키 프레임 애니메이션 */
+@keyframes ani-width {
+	from{
+		width: 200px;
+	}
+	
+	50%{
+		width: 1200px;
+	}
+	
+	to {
+		width: 600px;
+	}
+}
+
+
+
 #canvas img{
 	height: 200px;
-	transition-duration:500ms;
+	
+	/* transition-duration:500ms;
 	transition-property:transform;
 	transition-delay:1s;
-	transform-origin: left center;
+	transform-origin: left center; */
 }
 
  #canvas img:HOVER {
 	/*  height: 400px; */
-	 transform:rotate(-30deg);
-	 opacity:0.2;
+	/* transform:rotate(-30deg);
+	 opacity:0.2; */
+	 
 	/* transform:scaleX(2); */
 	/* transform:scale(2,2); */	
+	
+	/* easing function 사용 예 */
+	/* transition:1s opacity ease-in-out, 1s margin-top linear; */
+	
+	/* 계단식 */
+	/* transition:3s opacity steps(3,end); */
+	
+	animation-name:ani-width;
+	animation-duration:1s;
 } 
 
 </style>
@@ -30,8 +59,8 @@
 	</div>
 	<div id="canvas">
 		<img src="image1.jpg"/>
-		<img src="image2.jpg"/>
-		<img src="image3.jpg"/>
+		<!-- <img src="image2.jpg"/>
+		<img src="image3.jpg"/> -->
 	</div>
 </body>
 </html>
