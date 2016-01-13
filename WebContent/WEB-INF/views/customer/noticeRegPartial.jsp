@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<form action="noticeReg" method="post">
+
 		<div id="notice-article-detail" class="article-detail margin-large">
 			<!-- <form action="noticeRegProc.jsp" method="post"> 액션 지정안하면 자기자신이 처리 -->
 			<dl class="article-detail-row">
@@ -27,4 +27,3 @@
 			<input class="btn-save button" type="submit" value="저장" /> <a
 				class="btn-cancel button" href="notice.jsp">취소</a>
 		</p>
-</form>

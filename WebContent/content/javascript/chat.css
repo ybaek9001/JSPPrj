@@ -16,7 +16,7 @@
    margin:auto;
    margin-top:10px;
    height:350px;
-   background:blue;
+   background:#9bbdfd;
    /* opacity:0.5; */
    padding:10px;
    
@@ -91,7 +91,7 @@
    line-height:50px;
    border:1px solid #78a02c;
    background-color:#8cba35;
-   background-image:linear-gradient(rgba(0,0,0,0), rgba(0,0,0.1,0.05));
+   background-image:linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));
    color:#ffffff;
    padding:0px 8px;
 }
