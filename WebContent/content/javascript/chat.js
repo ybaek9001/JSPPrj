@@ -2,12 +2,41 @@
  * 
  */
 
+window.addEventListener("load",function(){
+	var curImg = null;
+	var board = document.querySelector("#board");
+	var pos={x:0, y:0};
+	var dragging = false;
+	
+	//alert(chatOutput.clientWidth);
+	document.onmousedown = function(event){
+		curImg = event.target
+		pos.x=event.clientX;
+		pos.y=event.clientY;
+		
+		dragging = true;
+	}
+	
+	board.onmouseup = function(event){
+		dragging = false;
+	}
+	
+	document.onmousemove = function(event){
+		if(curImg!=null && dragging){
+		console.log(event.x);
+		curImg.style.left = event.clientX-pos.x +"px";
+		curImg.style.top = event.clientY-pos.y +"px";
+		event.preventDefault();
+		}
+	}	
+});
 
+var wsocket;
 
 window.addEventListener("load", function(){
 	//현재 페이지를 구성하는 객체 또는 변수들 선언
-	var wsocket;
 	
+	var uid="waytogo";
 	var btnConn=document.querySelector("#btn-conn");
 	var btnSend=document.querySelector("#chat-input-panel .btn");
 	var outputList=document.querySelector("#chat-output ul");
@@ -53,18 +82,30 @@ window.addEventListener("load", function(){
 	
 	function sockMessage(event){
 		//alert(event.data);
-		printMessage("newlec",event.data);
+		var data = JSON.parse(event.data);
+		switch(data.type)
+		{
+		case "chat":
+			printMessage(data.uid, data.msg);
+			break;
+		case "draw":
+			break;
+		}
+		
 	}
 	
 	btnSend.onclick = function(event){
-		var userName ="newlec";
+		//var userName ="newlec";
 		var msg = inputBox.value;
-		
-		wsocket.send(msg);
+		var data = {type:"chat", uid:uid, msg:msg};
+		//alert(JSON.stringify(data));
+		data = JSON.stringify(data);
+		wsocket.send(data);
 		//printMessage(userName,msg);
 		
 		//텍스트 입력 상자의 문자열을 지우는 코드
 		inputBox.value="";
+		
 	}
 	
 	

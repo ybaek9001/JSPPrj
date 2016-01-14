@@ -9,45 +9,56 @@
 <body>
 	<h1>채팅 클라이언트</h1>
 	<div><input id="btn-conn" type="button" value="접속"></div>	
-	<div id="chat-window">
-		<template id="chat-template">
-		<li>
-			<img src="images/image1.jpg" />
-			<div>
-				<div></div>
-				<div></div>
+	<div><input id="btn-conn" type="button" value="저장"></div>	
+	<div id="aa">
+		<div id="chat-window">
+			<template id="chat-template">
+			<li>
+				<img src="images/image1.jpg" />
+				<div>
+					<div></div>
+					<div></div>
+				</div>
+			</li>
+			</template>
+	
+			<div id="chat-output">
+				<ul>
+					<li>
+						<img src="images/image1.jpg" />
+						<div>
+							<div>newlec</div>
+							<div>hello~~</div>
+						</div>
+					</li>
+					<li>
+						<img src="images/image3.jpg" />
+						<div>
+							<div>dragon</div>
+							<div>how are you~~</div>
+						</div>
+					</li>
+					<li>
+						<img src="images/image3.jpg" />
+						<div>
+							<div>dragon</div>
+							<div>how are fgfdsafdaffdafdafdadfdadaffdasffsgfsgfgafdafdaffffffffffffffffffffffffffffffffffffffffffffffffffdafd~~</div>
+						</div>
+					</li>
+				</ul>
 			</div>
-		</li>
-		</template>
-
-		<div id="chat-output">
-			<ul>
-				<li>
-					<img src="images/image1.jpg" />
-					<div>
-						<div>newlec</div>
-						<div>hello~~</div>
-					</div>
-				</li>
-				<li>
-					<img src="images/image3.jpg" />
-					<div>
-						<div>dragon</div>
-						<div>how are you~~</div>
-					</div>
-				</li>
-				<li>
-					<img src="images/image3.jpg" />
-					<div>
-						<div>dragon</div>
-						<div>how are fgfdsafdaffdafdafdadfdadaffdasffsgfsgfgafdafdaffffffffffffffffffffffffffffffffffffffffffffffffffdafd~~</div>
-					</div>
-				</li>
-			</ul>
+			<div id="chat-input-panel">
+				<textarea rows="" cols=""></textarea>
+				<div class="btn btn-default">전송</div>
+			</div>
 		</div>
-		<div id="chat-input-panel">
-			<textarea rows="" cols=""></textarea>
-			<div class="btn btn-default">전송</div>
+		<div id="bbs">
+			<div id="board">
+				<img src="images/image1.jpg"/>
+				<img src="images/image4.jpg"/>
+				<img src="images/image3.jpg"/>
+			</div>
+			<div id="drop-zone">이미지를 드래그 드롭하세요</div>
 		</div>
 	</div>
 </body>

@@ -63,7 +63,6 @@ var showDialog = function(url, btnSelector, btnHandler){
 			
 		}
 	}
-	
 	return dlg;
 };
 

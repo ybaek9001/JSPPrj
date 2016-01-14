@@ -17,7 +17,7 @@ public class NewlecSuccessHandler implements AuthenticationSuccessHandler {
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		System.out.println("인증성공");
-		
+		request.getSession().setAttribute("uid", authentication.getName());
 		response.sendRedirect("/JSPPrj/customer/notice");
 		
 		
