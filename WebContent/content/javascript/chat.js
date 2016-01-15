@@ -24,10 +24,12 @@ window.addEventListener("load",function(){
 		dragging = false;
 		var x = event.clientX-pos.x +"px";
 		var y = event.clientY-pos.y +"px";
-		var src = event.target.dataset.id;
+		var id = event.target.dataset.id;
+		
 		//var test = event.target['class: "tes']
-		var data = {type:"draw", id:data.id, x:x, y:y}
+		var data = {type:"draw", id:id, x:x, y:y}
 		data = JSON.stringify(data);
+		wsocket.send(data);
 		//alert(data);
 	}
 	
