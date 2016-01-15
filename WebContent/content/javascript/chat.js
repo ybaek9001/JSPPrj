@@ -5,12 +5,15 @@
 window.addEventListener("load",function(){
 	var curImg = null;
 	var board = document.querySelector("#board");
+	
+	//pos는 시작점?0,0->현재위치의 시작
 	var pos={x:0, y:0};
 	var dragging = false;
 	
 	//alert(chatOutput.clientWidth);
 	document.onmousedown = function(event){
 		curImg = event.target
+		
 		pos.x=event.clientX;
 		pos.y=event.clientY;
 		
@@ -19,6 +22,13 @@ window.addEventListener("load",function(){
 	
 	board.onmouseup = function(event){
 		dragging = false;
+		var x = event.clientX-pos.x +"px";
+		var y = event.clientY-pos.y +"px";
+		var src = event.target.dataset.id;
+		//var test = event.target['class: "tes']
+		var data = {type:"draw", id:data.id, x:x, y:y}
+		data = JSON.stringify(data);
+		//alert(data);
 	}
 	
 	document.onmousemove = function(event){
@@ -64,8 +74,8 @@ window.addEventListener("load", function(){
 	btnConn.onclick = function(event){
 		if(wsocket==undefined)
 		{
-			//wsocket = new WebSocket("ws://211.238.142.248/JSPPrj/content/chatserver")
-			wsocket = new WebSocket("ws://211.238.142.115:8080/JSPPrj/content/chatserver")
+			wsocket = new WebSocket("ws://211.238.142.248/JSPPrj/content/chatserver")
+			//wsocket = new WebSocket("ws://211.238.142.115:8080/JSPPrj/content/chatserver")
 			wsocket.onopen = sockOpen;
 			wsocket.onclose = sockClose;
 			wsocket.onmessage = sockMessage;
@@ -89,10 +99,18 @@ window.addEventListener("load", function(){
 			printMessage(data.uid, data.msg);
 			break;
 		case "draw":
+			alert("dfdfadfa");
+			var img = document.querySelector("img[data-id='"+data.id+"']")
+			//alert(data.x);
+			img.style.left = data.x;
+			img.style.top = data.y;
 			break;
 		}
 		
 	}
+	
+	
+	
 	
 	btnSend.onclick = function(event){
 		//var userName ="newlec";
