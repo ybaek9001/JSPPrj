@@ -101,7 +101,7 @@ window.addEventListener("load", function(){
 			printMessage(data.uid, data.msg);
 			break;
 		case "draw":
-			alert("dfdfadfa");
+			
 			var img = document.querySelector("img[data-id='"+data.id+"']")
 			//alert(data.x);
 			img.style.left = data.x;
