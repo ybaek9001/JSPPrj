@@ -1,0 +1,23 @@
+﻿.board-search{
+    /*margin-top:49px;
+    text-align:right;*/
+}
+
+.board-search select,
+.board-search input[type=text]{
+    /*height:22px;
+    border:1px solid #8CBA34;*/
+}
+
+.board-search input[type=text]{
+    /*width:150px;*/
+    /* 스타일 오버라이드 */
+    padding:0px;
+}
+
+.board-list
+{
+    margin-top:10px;
+}
+
+

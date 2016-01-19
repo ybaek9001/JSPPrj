@@ -3,60 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type ="text/javascript" src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
-<script>
+<script src="http://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+<script type="text/javascript">
 	window.onload=function(){
-		/* =========================jQuery의 사용 방법 1============================= */
+		
+		/* //====<JQuery의 사용 방법1>======
 		//크로스 브라우저가 가능하게 하는 방법은 갑옷 입히기
-		//(DOM)->jQuery((DOM))->jQuery기능
-		//**var btnAddText=$("#btn-add-text");//객체를 얻을 때? DOM의 기능이 아닌 jQuery 객체의 기능으로 구하라
-		//btnAddText.bind("click", function(){
-		//*btnAddText.click(function(){	
+		//(DOM)의 기능 -> JQuery((DOM)) -> 태권브이의 기능
+		var btnAddText=$("#btn-add-text"); //객체를 얻을때? DOM의 기능이 아닌 JQuery 객체의 기능으로 구하라
+		//btnAddText.bind("click", function(){   // 이벤트 바인딩
+		btnAddText.click(function(){	
 			//var div=document.querySelector("div");  // 공간확보
-		//*	var div=$("div");
-			//var txt=document.createTextNode("안녕하세요?");  // 자료 확보
-			//jQuery에서 TextNode를 생성하는 별도의 방법을 제공하지 않음
-		//*	var txt = "안녕하세요";
+			var div=$("div");
+			//var txt=document.createTextNode("안녕하삼??");  // 자료 확보
+			//JQuery에서 TextNode를 생성하는 별도의 방법으르 제공하지 않음. 그냥 텍스트 넣으면 됨
+			
+			var txt="안녕하세요.";
 			//div.appendChild(txt);  // 공간에 자료 넣기
-		//*	div.append(txt);
-		//*});
-		//btnAddText.onclick//속성 또한 더이상 DOM이 아닌 jQuery만의 기능으로 사용하라!
-		
-		/* =========================jQuery의 사용 방법 2============================= */
-		 $("#btn-add-text").click(function(){
-			 $("div").append("안녕하세요");	 
-		}); 
-		//-----------------------여기 해야되!!!!!---------------//
-		
-		//var txt1=document.body.childNodes[0];
+			div.append(txt);
 			
-			//var txt1=document.body.getElementsByTagName("input")[0];
-			
-			//var txt1=document.querySelectorAll("input")[0];
-			//var txt1=document.querySelector("input:first-child");
-			//var txt1=document.querySelector("input[type=text]");
-			//txt1.value="hello";
-			
-			//1.src 텍스트 박스에서 사용자가 입력한 값을 imgRoute라는 변수에 참조시킨다.
-			//var imgRoute=document.querySelector("input:first-child");
-			//2.그 값을 img 문서 객체의 src 속성에 대입한다
-			//var img=document.querySelector("img");
-			
-			//img.src=imgRoute.value;
-			//img.style.width="200px"; 
-			
-			
-		
-		/* var btnAddText=document.getElementById("btn-add-text");
-		btnAddText.onclick=function(){
-			
+		});   //btnAddText.onclick // 속성을 이용할때? 더이상 DOM이 아닌 JQuery만의 기능으로 사용하라  */
 				
-		}; */
+		//====<JQuery의 사용 방법2>======
+		$("#btn-add-text").click(function(){
+			$("div").append("안녕하삼???????");
+		});
+			
+		// 	//var txt1=document.body.childNodes[0];
+			
+		// 	//var txt1=document.body.getElementsByTagName("input")[0];
+			
+		// 	//var txt1=document.querySelectorAll("input")[0];
+		// 	//var txt1=document.querySelector("input:first-child");
+		// 	//var txt1=document.querySelector("input[type=text]");
+		// 	//txt1.value="hello";
+			
+		// 	/* //1.src 텍스트 박스에서 사용자가 입력한 값을 imgRoute라는 변수에 참조시킨다.
+		// 	var imgRoute=document.querySelector("input:first-child");
+		// 	//2.그 값을 img 문서 객체의 src 속성에 대입한다
+		// 	var img=document.querySelector("img");
+			
+		// 	img.src=imgRoute.value;
+		// 	img.style.width="200px"; */
+			
+		// 	var div=document.querySelector("div");  // 공간확보
+		// 	var txt=document.createTextNode("안녕하삼??");  // 자료 확보
+		// 	div.appendChild(txt);  // 공간에 자료 넣기 
+			
+			
+		//};
 		
 		
-		
-		/* =========================jQuery의 속성과 스타일 조작 예제로 변경============================= */
-		//<origin>
+		/* =============<JQuery의 속성과 스타일 조작 예제로 변경>============= */
+		/* ----<origin>---- */
 		/* var btnAddImg=document.getElementById("btn-add-img");
 		btnAddImg.onclick=function(){
 			
@@ -67,18 +66,29 @@
 			div.appendChild(img1);  // 공간에 자료 넣기
 		} */
 		
-		//<new one>
+		/* ----<new one>---- */
 		$("#btn-add-img").click(function(){
+			
 			//코드1
-			$("div").append($("<img src='images/image1.jpg' style='width:200px;'/>"));
+			//$("div").append($("<img src='images/img1.jpg' style='width:200px;'/>"));
 			//코드2
+			$("<img src='images/img1.jpg' style='width:200px;'/>").appendTo($("div"));
 		});
 		
 		var btnDel=document.getElementById("btn-del");
 		btnDel.onclick=function(){
 			
 			var div=document.querySelector("div"); 
-			div.removeChild(div.lastChild);
+			//div.removeChild(div.lastChild);
+			//$(div.lastChild).remove();
+			//$("div:last-child").children().last().prev().remove(); //마지막 노드의 이전노드
+			//$("div:last-child").children(":last-child").remove(); //엘리먼트 노드의 라스트 차일드
+			//$("div").children(":last-child").remove();  // 다중선택
+			//$("div").eq(1).children(":last-child").remove();
+			$($("div").get(1)).children(":last-child").remove(); // 위에꺼랑 동일
+			//자식만 관심있는 경우 children 밑에 자손들 모두 컨트롤 영역으로 하고 싶으면 find 사용
+			
+			//$("div").get(1).style.border="1px solid red"; // 객체 하차(DOM으로 내릴경우 get, 제이쿼리 객체는 eq)
 		}
 		
 		var btnClone=document.getElementById("btn-clone");
