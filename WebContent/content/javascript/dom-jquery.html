@@ -3,6 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.strong{
+		border:1px solid red;
+	}
+	
+	#container{
+		position:relative;
+		height: 200px;
+		background: yellow;
+	}
+	
+	#container > div{
+		position: absolute;
+		top:50px;
+		background:pink;
+	}
+</style>
 <script src="http://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 	window.onload=function(){
@@ -23,10 +40,46 @@
 			div.append(txt);
 			
 		});   //btnAddText.onclick // 속성을 이용할때? 더이상 DOM이 아닌 JQuery만의 기능으로 사용하라  */
-				
+		var toggle = true;		
 		//====<JQuery의 사용 방법2>======
 		$("#btn-add-text").click(function(){
-			$("div").append("안녕하삼???????");
+			
+			$("body").prepend($("<input type='button' value='새버튼'/>"));
+			alert($("#src").prop("value"));
+			
+			/* var top =$("#container > div").position().top;
+			var offTop = $("#container > div").offset().top
+			alert("top:"+top+", offTop:"+offTop); */
+			
+			//$("div").empty();
+			
+			//$("#btn-add-text").after($("<input type='button' value='새버튼'/>"));
+			
+			/* var style1 = {
+				"border": "1px solid blue",
+				"background": "purple"
+			}
+			var style2 = {
+				"border": "5px solid blue",
+				"background": "orange"
+			}
+			$("div").css(style2); */
+			
+			//alert($("div").position().top);
+			
+			//$("div").append("안녕하세요???????");
+			//$("#btn-add-text").attr("value", "안녕?");	//setter
+			//alert($("#src").val());	//getter
+			//$("div").html();
+			/* //alert($("div").html());
+			//$("div").html($("div").html()+"<span>hello</span>");
+			//$("div").text($("div").html()+"<span>hello</span>");
+			//alert($("div").text()); */
+			/* if(toggle)
+				$("div").addClass("strong");
+			else
+				$("div").removeClass("strong");
+			toggle = !toggle; */
 		});
 			
 		// 	//var txt1=document.body.childNodes[0];
@@ -120,9 +173,11 @@
 	<input id="btn-clone" type="button" value="노드복제"/>
 	<input id="btn-del" type="button" value="막내삭제"/>
 	<input id="btn-replace" type="button" value="자리바꾸기"/>
-	
+	<div id="container">
 	<div>
 		<img/>
+		<span>hello</span>
+	</div>
 	</div>
 </body>
 </html>
