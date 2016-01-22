@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#banner{
+	width:600px;
+	height:300px;
+	position:relative;
+	background:beige;
+}
+
+#banner div{
+	width:200px;
+	height: 100px;
+	position:absolute;
+	/* --------------------- */
+	left:0px;
+	top:0px;
+	background:	yellow;
+	opacity:0.5;
+	z-index:1;
+	
+	transition:1s;
+}
+
+#banner div:nth-child(1){
+	background: red;
+}
+
+#banner div:nth-child(2){
+	background: green;
+}
+
+#banner div:nth-child(3){
+	background: blue;
+}
+
+#banner div:hover{
+	/* width:300px;
+	height:150px;
+	left:150px;
+	top:15px;
+	border:1px solid black; */
+	transform:rotate(30deg)
+}
+
+
+</style>
+<script src="http://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(window).load(function(){
+		var styles=[{
+			left:"50px",
+			top:"50px",
+			background:	"red",
+			opacity:"1",
+			"z-index":1
+		},
+		{
+			left:"200px",
+			top:"100px",
+			background: "green",
+			opacity:"1",
+			"z-index":2
+		},
+		{
+			left:"350px",
+			top:"50px",
+			background: "blue",
+			opacity:"1",
+			"z-index":1
+		}];
+		
+		/* --------------------초기화------------------ */
+		var divs=$("#banner div");
+		for(var i=0; i<divs.length; i++)
+			divs.eq(i).delay(300*i).animate(styles[i],1000);
+		
+		var off=0;
+		$("#btn-left").click(function(){
+			off++;
+			for(var i=0; i<divs.length; i++)
+			{
+			 divs.eq(i).animate(styles[(i+off)%3],1000);
+			}
+		}) 
+
+		
+		$("#btn-right").click(function(){
+			off+=2
+			for(var i=0; i<divs.length; i++)
+			{
+			 	divs.eq(i).animate(styles[(i+off)%3],1000);
+			}
+		}) 
+		
+		$("#ajax").click(function(){
+			
+			$.ajax("../../customer/noticeJSON?p=1")
+				.done(function(data){
+					alert(data);
+				})
+				.fail(function(){
+					alert("ㅠㅠ");
+				})
+		})  
+		
+		
+	})
+</script>
+</head>
+<body>
+	<div>
+		<input id="btn-left" type="button" value="왼쪽으로">
+		<input id="btn-right" type="button" value="오른쪽으로">
+		<input id="ajax" type="button" value="ajax">	
+	</div>
+	<div id="banner">
+		<div class="left"></div>
+		<div class="center"></div>
+		<div class="right"></div>
+	</div>
+</body>
+</html>

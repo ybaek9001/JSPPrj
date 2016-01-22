@@ -70,8 +70,7 @@ window.addEventListener("load", function(){
 		outputList.appendChild(clone);
 		chatOutput.scrollTop = chatOutput.scrollHeight;
 	}
-	
-	
+		
 	//현재 페이지에서 사용하는 이벤트 처리 함수들
 	btnConn.onclick = function(event){
 		if(wsocket==undefined)

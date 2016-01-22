@@ -46,7 +46,7 @@
 	  	table.style.height = table.clientHeight+"px";
 	  	
 	  	var tbody = table.querySelector("tbody");
-	  	tbody.style.height = tbody.clientHeight+"px";
+	  	tbody.style.height = tbody.clientHeight+"px"; 
 	  	
 	  
 	   

@@ -23,7 +23,6 @@
 <script src="http://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 	window.onload=function(){
-		
 		/* //====<JQuery의 사용 방법1>======
 		//크로스 브라우저가 가능하게 하는 방법은 갑옷 입히기
 		//(DOM)의 기능 -> JQuery((DOM)) -> 태권브이의 기능
@@ -40,12 +39,24 @@
 			div.append(txt);
 			
 		});   //btnAddText.onclick // 속성을 이용할때? 더이상 DOM이 아닌 JQuery만의 기능으로 사용하라  */
+		
 		var toggle = true;		
 		//====<JQuery의 사용 방법2>======
 		$("#btn-add-text").click(function(){
 			
-			$("body").prepend($("<input type='button' value='새버튼'/>"));
-			alert($("#src").prop("value"));
+			$("#container")
+			.animate({
+				height:"300px",
+				opacity:0.5
+			},500)
+			.animate({
+				height:"50px",
+				opacity:1
+			},3000
+			, function(){$("#src").attr("value", "wow~~~~")});
+			
+			/* $("body").prepend($("<input type='button' value='새버튼'/>"));
+			alert($("#src").prop("value")); */
 			
 			/* var top =$("#container > div").position().top;
 			var offTop = $("#container > div").offset().top
