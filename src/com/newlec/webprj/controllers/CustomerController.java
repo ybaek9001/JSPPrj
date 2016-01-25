@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.newlec.webprj.dao.NoticeDao;
 import com.newlec.webprj.dao.mybatis.MyBatisNoticeDao;
@@ -112,14 +113,14 @@ public class CustomerController {
 			Notice n = list.get(i);
 			if (i+1 == size)
 				builder.append(
-						String.format("{'code':'%s', 'title':'%s', 'writer':'%s'"
-								+ ", 'regdate':'%s', 'hit':'%s'}"
+						String.format("{\"code\":\"%s\", \"title\":\"%s\", \"writer\":\"%s\""
+								+ ", \"regdate\":\"%s\", \"hit\":\"%s\"}"
 								, n.getCode(), n.getTitle(), n.getWriter(), n.getRegDate(), n.getHit()));
 
 			else
 				builder.append(
-						String.format("{'code':'%s', 'title':'%s', 'writer':'%s'"
-								+ ", 'regdate':'%s', 'hit':'%s'}, "
+						String.format("{\"code\":\"%s\", \"title\":\"%s\", \"writer\":\"%s\""
+								+ ", \"regdate\":\"%s\", \"hit\":\"%s\"}, "
 								, n.getCode(), n.getTitle(), n.getWriter(), n.getRegDate(), n.getHit()));
 		}
 		
@@ -159,12 +160,15 @@ public class CustomerController {
 		return "customer/noticeReg"; //GET요청을 처리할 View제공
 	}	
 	
-	@RequestMapping(value="noticeRegAjax")
-	public void noticeRegAjax(Notice n, PrintWriter out){
-		out.write("ok");
-		
-		out.write("fail");
-		
+	@RequestMapping("noticeRegAjax")
+	public void noticeRegAjax(@RequestParam("p[]")String[] p, Notice n, PrintWriter out){
+		System.out.println("received:" + p.length);
+		System.out.println("P[1]:" + p[1]);
+		//데이터를 처리하는 코드
+		if(p!=null)
+			out.write("ok");
+		else
+			out.write("fail");
 	}
 	
 	@RequestMapping(value="noticeReg", method=RequestMethod.POST)

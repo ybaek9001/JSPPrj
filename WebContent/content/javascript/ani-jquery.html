@@ -98,13 +98,31 @@
 		
 		$("#ajax").click(function(){
 			
-			$.ajax("../../customer/noticeJSON?p=1")
+			
+			$.post("../../customer/noticeRegAjax",{"p":[1,2,3]},function(data){
+				//var json=eval(data);
+				alert(data);
+			}); 
+			
+			
+			
+			//Ajax 방법 2
+			//$.getJSON("../../customer/noticeJSON?p=1",function(data){
+			/* $.getJSON("../../customer/noticeJSON",{p:1},function(data){
+				//var json=eval(data);
+				alert(data[0].title);
+			});  */
+			
+			
+			
+			//Ajax 방법 1
+			/* $.ajax("../../customer/noticeJSON?p=1")
 				.done(function(data){
 					alert(data);
 				})
 				.fail(function(){
 					alert("ㅠㅠ");
-				})
+				}) */
 		})  
 		
 		
