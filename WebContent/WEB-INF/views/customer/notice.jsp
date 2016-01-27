@@ -11,7 +11,8 @@
 <script src="../content/js/ui.js" type="text/javascript"></script>
 
 <script>
-   var param={f:'${param.f}',q:'${param.q}'};
+   //공지사항에서 검색폼에서 필요한 데이터 설정
+   var param={f:'${param.f}',q:'${param.q}'};	//javascript Object형식
    if(param.f=="")
       param.f="TITLE";
    
@@ -28,14 +29,14 @@
    
    function dataBind(row,data){
       var tds=row.querySelectorAll("td");
-      var keys=["code","title","writer"];
+      var keys=["code","title","writer"];	//javascript Array형식
       
       for(var i=0;i<tds.length;i++)  //for-in문
       {
          //1.innerText
          //2.innerHTML 심으려고 하는 데이터가 태그를 포함하고 있을때 실행가능
          //3.content  
-         tds[i].innerHTML=data[keys[i]];
+         tds[i].innerHTML=data[keys[i]];	//data.속성이름 대신 data[속성이름]형식으로 사용하면 배열 keys를 이용할 수 있음 
       }      
    }
 
@@ -382,7 +383,7 @@
 
 		var btnClone = document.querySelector("input[value='행복제']");
 		btnClone.onclick = function() {
-
+			//자바스크립트 객체배열 형식
 			var datas = [ {
 				code : 1,
 				title : '<b>자바스크립트란?</b>',
@@ -502,7 +503,6 @@
          <label for="f"
          class="hidden">검색필드</label>
          <select name="f">
-         
             <option value="TITLE" <c:if test="${param.f=='TITLE'}">selected="selected"</c:if>>제목</option>
             <option value="CONTENT" <c:if test="${param.f=='CONTENT'}">selected="selected"</c:if>>내용</option>
          </select>
