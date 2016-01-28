@@ -1,10 +1,10 @@
 ﻿var noticeModule = angular.module("notice", []);
 
-noticeModule.controller('notice-controller', function ($scope) {
+noticeModule.controller('noticeController', function ($scope) {
     	
 	var test="hello world";
 	$scope.aa=test;
-	var list = [
+	/*var list = [
         { "id": "1", "title": "새로운 서비스가 시작됩니다.", "writer": "newlec", "regdate": "2016-02-16", "hit": 12 },
         { "id": "2", "title": "새로운 강의가 업로드 되었습니다.", "writer": "newlec", "regdate": "2016-02-22", "hit": 72 },
         { "id": "3", "title": "JSP 강의가 업데이트 되었습니다.", "writer": "newlec", "regdate": "2016-02-26", "hit": 245 },
@@ -20,5 +20,5 @@ noticeModule.controller('notice-controller', function ($scope) {
         { "id": "13", "title": "훈장님의 지도를 받아보세요.", "writer": "newlec", "regdate": "2016-04-10", "hit": 2 }
     ];
 
-    $scope.list = list;
+    $scope.list = list;*/
 });

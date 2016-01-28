@@ -5,11 +5,10 @@
     <title>전문 프로그래머들을 위한 프로그래밍 강좌 사이트 www.newlecture.com</title>
     <link href="../css/customer/layout.css" rel="stylesheet" />
     <link href="../css/customer/notice.css" rel="stylesheet" type="text/css" />
-    <script src="/Content/js/extensions.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <script src="../controllers/notice-controller.js"></script>
 </head>
-<body ng-controller="notice-controller">
+<body ng-controller="noticeController">
     <header id="header">
         <div class="content-container">
             <!-- 헤더부분 -->
@@ -20,7 +19,7 @@
                 <nav id="main-menu">
                     <h1 class="hidden">메인메뉴</h1>
                     <ul class="clearfix">
-                        <li><a href="">학습가이드</a></li>
+                        <li><a href="">학습가이드{{aa}}</a></li>
                         <li><a href="">뉴렉과정</a></li>
                         <li><a href="">강좌선택</a></li>
                     </ul>
@@ -94,7 +93,7 @@
                 </nav>
             </aside>
             <div id="body">
-                <h2 class="main-body-title-top">공지사항</h2>
+                <h2 class="main-title">공지사항</h2>
 
                 <div class="breadcrumb">
                     <h3 class="hidden">현재경로</h3>
@@ -105,40 +104,9 @@
                     </ol>
                 </div>
 
-                <div ng-show="noticeRegVisible">
-                    <h3 class="hidden">공지사항 등록 폼</h3>
-                    <form class="main-body-margin-v-top">
-                        <fieldset>
-                            <legend class="hidden">공지사항 입력 필드</legend>
-                            <table class="board board-detail">
-                                <tbody>
-                                    <tr>
-                                        <th>제목</th>
-                                        <td><input type="text" name="title" /></td>
-                                    </tr>
-                                    <tr>
-                                        <th>내용</th>
-                                        <td>
-                                            <textarea></textarea>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </fieldset>
-                    </form>
-
-                    <div class="text-align-center main-body-margin-v">
-                        <a href="notice" class="btn btn-default" ng-click="btnWriteClick()">등록하기</a>
-                    </div>
-                </div>
-
-                <div class="main-body-search main-body-margin-v-top">
+                <div class="board-search">
                     <h3 class="hidden">공지사항 검색</h3>
-                    <div class="main-body-buttons-top">
-                        <a href="" class="btn btn-default" ng-click="toggleNoticeReg()">글작성하기</a>
-                        <a href="" class="btn btn-default">삭제</a>
-                    </div>
-                    <form class="main-body-search" method="get">
+                    <form class="search-form" method="get">
                         <fieldset>
                             <legend class="hidden">공지사항 검색 필드</legend>
                             <label class="hidden">분류</label>
@@ -155,43 +123,43 @@
                 </div>
 
                 <h3 class="hidden">공지사항 목록</h3>
-                <table class="board board-list main-body-margin-v">
+                <table class="board-list">
                     <thead>
                         <tr>
-                            <th class="col-width-mostnarrow"><input type="checkbox" /></th>
-                            <th class="col-width-narrow">번호</th>
+                            <th><input type="checkbox" /></th>
+                            <th>번호</th>
                             <th>제목</th>
-                            <th class="col-width-normal">작성자</th>
-                            <th class="col-width-normal">작성일</th>
-                            <th class="col-width-mostnarrow">조회수</th>
+                            <th>작성자</th>
+                            <th>작성일</th>
+                            <th>조회수</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="col-width-mostnarrow"><input type="checkbox" /></td>
-                            <td class="col-width-narrow"></td>
-                            <td class="col-align-left col-indent col-ellipsis"><a href="">{{list[0].title}}</a></td>
-                            <td class="col-width-normal"></td>
-                            <td class="col-width-normal"></td>
-                            <td class="col-width-mostnarrow"></td>
-                        </tr>
+                        <tr ng-repeat="n in list">
+                            <td><input type="checkbox" /></td>
+                            <td>{{n.id}}</td>
+                            <td><a href="">{{n.title}}</a></td>
+                            <td>{{n.writer}}</td>
+                            <td>{{n.regdate}}</td>
+                            <td>{{n.hit}}</td>
+                        </tr>                        
                     </tbody>
                 </table>
 
-                <div class="page-indexer main-body-margin-v">
+                <div class="page-indexer">
                     <h3 class="hidden">목록의 현재 위치</h3>
                     <span><span class="text-highlight">1</span>/1 page</span>
                 </div>
 
-                <div class="pager-container main-body-margin-v">
+                <div class="pager-container">
                     <div class="pager">
                         <h3 class="hidden">페이저</h3>
 
-                        <span class="btn btn-notext btn-prev" style="cursor:default;">이전</span>
+                        <span class="btn btn-prev" style="cursor:default;">이전</span>
                         <ul>
                             <li><a href="notice?p=1" class="text-highlight">1</a></li>
                         </ul>
-                        <span class="btn btn-notext btn-next" style="cursor:default;">다음</span>
+                        <span class="btn btn-next" style="cursor:default;">다음</span>
 
                         <a class="hidden" href="">다음페이지</a>
                     </div>
