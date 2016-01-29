@@ -114,12 +114,12 @@
                                 <tbody>
                                     <tr>
                                         <th>제목</th>
-                                        <td><input type="text" name="title" /></td>
+                                        <td><input type="text" name="title" ng-model="title"/></td>
                                     </tr>
                                     <tr>
                                         <th>내용</th>
                                         <td>
-                                            <textarea></textarea>
+                                            <textarea ng-model="content"></textarea>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -167,13 +167,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="col-width-mostnarrow"><input type="checkbox" /></td>
-                            <td class="col-width-narrow"></td>
-                            <td class="col-align-left col-indent col-ellipsis"><a href="">{{list[0].title}}</a></td>
-                            <td class="col-width-normal"></td>
-                            <td class="col-width-normal"></td>
-                            <td class="col-width-mostnarrow"></td>
+                        <tr ng-repeat="n in list">
+                            <td class="col-width-mostnarrow"><input type="checkbox" ng-model="n.id"/></td>
+                            <td class="col-width-narrow" ng-bind="n.id">${n.id}</td>
+                            <td class="col-align-left col-indent col-ellipsis"><img ng-src="../images/{{n.img}}"><a href="" ng-bind="n.title">${n.title}</a></td>
+                            <td class="col-width-normal" ng-bind="n.writer">${n.writer}</td>
+                            <td class="col-width-normal" ng-bind="n.regdate">${n.regdate}</td>
+                            <td class="col-width-mostnarrow" ng-bind="n.hit">${n.hit}</td>
                         </tr>
                     </tbody>
                 </table>

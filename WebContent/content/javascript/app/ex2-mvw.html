@@ -16,6 +16,9 @@
 		$scope.x=0;
 		$scope.y=0;
 		$scope.result = 0;
+		
+		$scope.$watch("x",xChanged);
+		
 		//okButton.onclick = function(){
 		$scope.okButtonClick = function(){
 			/* var x = parseInt(xText.value);
@@ -30,6 +33,13 @@
 			//$scope.result = "<span style='color:red;'>result</span> is" +(x+y);
 		}
 		
+		function xChanged(){
+			var x = parseInt($scope.x);
+			var y = parseInt($scope.y); 			
+		
+			$scope.result = x+y;
+		}
+		
 		//안드로이드 할 때//
 		/* var btnOk =this.getViewById("?");
 		btnOl.setOnClickListener(...); */
@@ -39,7 +49,7 @@
 </script>
 </head>
 <body ng-controller="calc-controller">
-	<input id="x" type="text" ng-model="x" dir="rtl"/>	<!-- 여기 x,y는 VM(view model임 양방향!!) -->
+	<input id="x" type="text" ng-model="x" dir="rtl" />	<!-- 여기 x,y는 VM(view model임 양방향!!) -->
 	<input id="y" type="text" ng-model="y" dir="rtl"/>
 	<input id="btn-ok" type="button" value="계산" ng-click="okButtonClick()"/>
 	<!-- <input id="result" type="text" value="{{result}}" dir="rtl"/> -->	<!-- 이건 양방향일 필요가 없어서 ng-model 사용 안함 -->
