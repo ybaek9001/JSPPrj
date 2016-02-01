@@ -25,9 +25,15 @@ noticeModule.controller('notice-controller', function ($scope, $http) {
 	$scope.list = null; 
 	$scope.noticeRegVisible = false;
 	
+	$scope.regcode="";
 	$scope.title="";
-	$scope.content="";
+	$scope.writer="waytogo";	//로그인  사람의 id를 writer에 셋팅해 줘야 함!!!!
+	$scope.regdate="";
+	$scope.hit=0;
 	
+	
+	$scope.content="";
+
 	$scope.noticeRegButtonText="글작성?";
 	
 	//Simple GET request example
@@ -38,7 +44,8 @@ noticeModule.controller('notice-controller', function ($scope, $http) {
 		$scope.list = response.data;
 		for(var i=0; i<$scope.list.length; i++)
 			$scope.list[i].isChecked=false;
-		
+		$scope.regcode=""+(parseInt($scope.list[0].code)+1);
+			
 	}, function errorCallback(response) {
 		alert("실패");
 	});
@@ -57,7 +64,8 @@ noticeModule.controller('notice-controller', function ($scope, $http) {
     };
     
     $scope.btnWriteClick = function(){
-    	var notice = {"title": $scope.title, "content":$scope.content};
+    	$scope.regdate = new Date();
+    	var notice = {"code":$scope.regcode, "writer":$scope.writer, "title": $scope.title, "content":$scope.content, "hit":$scope.hit, "regdate":$scope.regdate};
     	
     	$http({
     		method : 'POST',
@@ -68,7 +76,8 @@ noticeModule.controller('notice-controller', function ($scope, $http) {
     		if(response.data == "ok")
     	    	$scope.list.splice(0,0,notice);
     			$scope.title="";
-    			$scope.content="";    
+    			$scope.content=""; 
+    			$scope.regdate="";
     	}, function errorCallback(response) {
     		alert("실패");
     	});

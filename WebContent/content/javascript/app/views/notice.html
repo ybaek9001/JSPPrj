@@ -112,6 +112,14 @@
                             <legend class="hidden">공지사항 입력 필드</legend>
                             <table class="board board-detail">
                                 <tbody>
+                                	<tr style="display:none;">
+                                        <th >번호</th>
+                                        <td ng-bind="regcode"></td>
+                                    </tr>
+                                	<tr>
+                                        <th>작성자</th>
+                                        <td ng-bind="writer"></td>
+                                    </tr>
                                     <tr>
                                         <th>제목</th>
                                         <!-- ng-model:input과 같은 value값을 바인드 할 때 사용 -->
@@ -122,6 +130,10 @@
                                         <td>
                                             <textarea ng-model="content"></textarea>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <th>작성일</th>
+                                        <td ng-bind="regdate"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -171,7 +183,7 @@
                     <tbody>
                         <tr ng-repeat="n in list">
                             <td class="col-width-mostnarrow"><input type="checkbox" ng-checked="allCheck" ng-model="n.isChecked"/></td>
-                            <td class="col-width-narrow" ng-bind="n.id">${n.id}</td>
+                            <td class="col-width-narrow" ng-bind="n.code">${n.code}</td>
                             <td class="col-align-left col-indent col-ellipsis"><img ng-src="../images/{{n.img}}"><a href="" ng-bind="n.title">${n.title}</a></td>
                             <td class="col-width-normal" ng-bind="n.writer">${n.writer}</td>
                             <td class="col-width-normal" ng-bind="n.regdate">${n.regdate}</td>
