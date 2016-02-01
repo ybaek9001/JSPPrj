@@ -1,10 +1,11 @@
 ﻿var noticeModule = angular.module("notice", []);
 
-noticeModule.controller('notice-controller', function ($scope) {
+noticeModule.controller('notice-controller', function ($scope, $http) {
     	
 	var test="hello world";
 	$scope.aa=test;
-	var list = [
+	
+	/*var list = [
         { "id": "1", "title": "새로운 서비스가 시작됩니다.", "writer": "newlec", "regdate": "2016-02-16", "hit": 12, "img":"icon-recommend.png" },
         { "id": "2", "title": "새로운 강의가 업로드 되었습니다.", "writer": "newlec", "regdate": "2016-02-22", "hit": 72, "img":"icon-recommend.png" },
         { "id": "3", "title": "JSP 강의가 업데이트 되었습니다.", "writer": "newlec", "regdate": "2016-02-26", "hit": 245, "img":"icon-recommend.png" },
@@ -18,23 +19,68 @@ noticeModule.controller('notice-controller', function ($scope) {
         { "id": "11", "title": "Mean 스택 프로젝트 강좌를 확인해 보세요.", "writer": "newlec", "regdate": "2016-03-30", "hit": 10, "img":"icon-recommend.png" },
         { "id": "12", "title": "훈장님 서비스가 시작됩니다.", "writer": "newlec", "regdate": "2016-04-06", "hit": 3, "img":"icon-recommend.png" },
         { "id": "13", "title": "훈장님의 지도를 받아보세요.", "writer": "newlec", "regdate": "2016-04-10", "hit": 2, "img":"icon-recommend.png" }
-    ];
+    ];*/
+	
     //VM 초기 설정
-	$scope.list = list; 
+	$scope.list = null; 
 	$scope.noticeRegVisible = false;
+	
 	$scope.title="";
 	$scope.content="";
+	
+	$scope.noticeRegButtonText="글작성?";
+	
+	//Simple GET request example
+	$http({
+		method : 'GET',
+		url : '../../../../customer/noticeJSON?p=1'
+	}).then(function successCallback(response) {
+		$scope.list = response.data;
+		for(var i=0; i<$scope.list.length; i++)
+			$scope.list[i].isChecked=false;
+		
+	}, function errorCallback(response) {
+		alert("실패");
+	});
+	
+	
+	
+	
     
-    //이벤트 설정
+    // 이벤트 설정
     $scope.toggleNoticeReg = function(){
     	$scope.noticeRegVisible=!$scope.noticeRegVisible;	
+    	if($scope.noticeRegVisible)
+    		$scope.noticeRegButtonText = "글쓰기 숨기기?"
+    	else
+    		$scope.noticeRegButtonText="글작성할까?";
     };
     
     $scope.btnWriteClick = function(){
-    	var notice = { "id": "13", "title": $scope.title, "writer": "newlec", "regdate": "2016-04-10", "hit": 2, "img":"icon-recommend.png" }
-    	/*$scope.list.push(notice);*/
-    	$scope.list.splice(1,0,notice);
-    	event.preventDefault();
+    	var notice = {"title": $scope.title, "content":$scope.content};
+    	
+    	$http({
+    		method : 'POST',
+    		url : '../../../../customer/noticeRegAjax',
+    		data : notice
+    		//header: {'Content-Type':'applicaton/json; charset=utf-8'},	
+    	}).then(function successCallback(response) {
+    		if(response.data == "ok")
+    	    	$scope.list.splice(0,0,notice);
+    			$scope.title="";
+    			$scope.content="";    
+    	}, function errorCallback(response) {
+    		alert("실패");
+    	});
+    	event.preventDefault();    	
+    }
+    
+    $scope.btnDelClicked = function(){
+    	var cnt=0;
+    	for(var i=0; i<$scope.list.length; i++)
+    		if($scope.list[i].isChecked)
+    			cnt++;
+    	alert(cnt);
     }
     
 });

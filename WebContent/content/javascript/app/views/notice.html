@@ -114,6 +114,7 @@
                                 <tbody>
                                     <tr>
                                         <th>제목</th>
+                                        <!-- ng-model:input과 같은 value값을 바인드 할 때 사용 -->
                                         <td><input type="text" name="title" ng-model="title"/></td>
                                     </tr>
                                     <tr>
@@ -135,8 +136,9 @@
                 <div class="main-body-search main-body-margin-v-top">
                     <h3 class="hidden">공지사항 검색</h3>
                     <div class="main-body-buttons-top">
-                        <a href="" class="btn btn-default" ng-click="toggleNoticeReg()">글작성하기</a>
-                        <a href="" class="btn btn-default">삭제</a>
+                  				  <!-- 	ng-bind:innerText로 들어가는 값을 바인드 할 때 사용 -->
+                        <a href="" class="btn btn-default" ng-click="toggleNoticeReg()" ng-bind="noticeRegButtonText">글작성하기</a>
+                        <a href="" class="btn btn-default" ng-click="btnDelClicked()">삭제</a>
                     </div>
                     <form class="main-body-search" method="get">
                         <fieldset>
@@ -158,7 +160,7 @@
                 <table class="board board-list main-body-margin-v">
                     <thead>
                         <tr>
-                            <th class="col-width-mostnarrow"><input type="checkbox" /></th>
+                            <th class="col-width-mostnarrow"><input type="checkbox" ng-model="allCheck"/></th>
                             <th class="col-width-narrow">번호</th>
                             <th>제목</th>
                             <th class="col-width-normal">작성자</th>
@@ -168,7 +170,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="n in list">
-                            <td class="col-width-mostnarrow"><input type="checkbox" ng-model="n.id"/></td>
+                            <td class="col-width-mostnarrow"><input type="checkbox" ng-checked="allCheck" ng-model="n.isChecked"/></td>
                             <td class="col-width-narrow" ng-bind="n.id">${n.id}</td>
                             <td class="col-align-left col-indent col-ellipsis"><img ng-src="../images/{{n.img}}"><a href="" ng-bind="n.title">${n.title}</a></td>
                             <td class="col-width-normal" ng-bind="n.writer">${n.writer}</td>

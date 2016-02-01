@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -161,14 +162,28 @@ public class CustomerController {
 	}	
 	
 	@RequestMapping("noticeRegAjax")
-	public void noticeRegAjax(@RequestParam("p[]")String[] p, Notice n, PrintWriter out){
-		System.out.println("received:" + p.length);
-		System.out.println("P[1]:" + p[1]);
-		//데이터를 처리하는 코드
-		if(p!=null)
+	//public void noticeRegAjax(@RequestParam("p[]")String[] p, Notice n, PrintWriter out){
+	//map 형식이 아닌 요청 body를 그대로 사용하기 위해 @RequestBody를 추가함
+	//반드시 JSON 해석기 중 하나(GSON..)를 lib로 포함해 줘야 함
+	//그렇지 않으면 request 415에러가 발생 함
+	public void noticeRegAjax(@RequestBody Notice n, PrintWriter out, Principal principal) throws SQLException{
+		/*System.out.println("received:" + p.length);
+		System.out.println("P[1]:" + p[1]);*/
+		//System.out.println(n.getTitle());
+		//out.println(n.getTitle());
+		n.setWriter("waytogo");
+		int result = noticeDao.insert(n);
+		
+		if(result>=1)
 			out.write("ok");
 		else
-			out.write("fail");
+			out.write("error");
+		
+		//데이터를 처리하는 코드
+		/*if(p!=null)
+			out.write("ok");
+		else
+			out.write("fail");*/
 	}
 	
 	@RequestMapping(value="noticeReg", method=RequestMethod.POST)
