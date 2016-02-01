@@ -112,17 +112,11 @@ public class CustomerController {
 		int size = list.size();
 		for (int i = 0; i < list.size(); i++) {
 			Notice n = list.get(i);
-			if (i+1 == size)
-				builder.append(
-						String.format("{\"code\":\"%s\", \"title\":\"%s\", \"writer\":\"%s\""
-								+ ", \"regdate\":\"%s\", \"hit\":\"%s\"}"
-								, n.getCode(), n.getTitle(), n.getWriter(), n.getRegDate(), n.getHit()));
-
-			else
-				builder.append(
-						String.format("{\"code\":\"%s\", \"title\":\"%s\", \"writer\":\"%s\""
-								+ ", \"regdate\":\"%s\", \"hit\":\"%s\"}, "
-								, n.getCode(), n.getTitle(), n.getWriter(), n.getRegDate(), n.getHit()));
+			builder.append(
+				String.format("{\"code\":\"%s\", \"title\":\"%s\", \"writer\":\"%s\", \"regdate\":\"%s\", \"hit\":\"%s\"}"
+							, n.getCode(), n.getTitle(), n.getWriter(), n.getRegDate(), n.getHit()));
+			if (i < size-1)
+				builder.append(", ");		
 		}
 		
 		
