@@ -1,4 +1,4 @@
-﻿var noticeModule = angular.module("notice", []);
+﻿var noticeModule = angular.module("notice", ["ngAnimate"]);
 
 noticeModule.controller('notice-controller', function ($scope, $http) {
     	
@@ -34,7 +34,7 @@ noticeModule.controller('notice-controller', function ($scope, $http) {
 	
 	$scope.content="";
 
-	$scope.noticeRegButtonText="글작성?";
+	$scope.noticeRegButtonText="글작성";
 	
 	//Simple GET request example
 	$http({
@@ -58,14 +58,16 @@ noticeModule.controller('notice-controller', function ($scope, $http) {
     $scope.toggleNoticeReg = function(){
     	$scope.noticeRegVisible=!$scope.noticeRegVisible;	
     	if($scope.noticeRegVisible)
-    		$scope.noticeRegButtonText = "글쓰기 숨기기?"
+   		{
+    		$scope.noticeRegButtonText = "글쓰기 숨기기";	
+   		}
     	else
-    		$scope.noticeRegButtonText="글작성할까?";
+    		$scope.noticeRegButtonText="글작성";
     };
     
     $scope.btnWriteClick = function(){
     	$scope.regdate = new Date();
-    	var notice = {"code":$scope.regcode, "writer":$scope.writer, "title": $scope.title, "content":$scope.content, "hit":$scope.hit, "regdate":$scope.regdate};
+    	var notice = {"code":$scope.regcode, "writer":$scope.writer, "title": $scope.title, "content":$scope.content, "hit":$scope.hit, "regDate":$scope.regdate};
     	
     	$http({
     		method : 'POST',
@@ -74,10 +76,13 @@ noticeModule.controller('notice-controller', function ($scope, $http) {
     		//header: {'Content-Type':'applicaton/json; charset=utf-8'},	
     	}).then(function successCallback(response) {
     		if(response.data == "ok")
-    	    	$scope.list.splice(0,0,notice);
-    			$scope.title="";
-    			$scope.content=""; 
-    			$scope.regdate="";
+			{
+	    	$scope.list.splice(0,0,notice);
+	    	$scope.regcode=""+(parseInt($scope.regcode)+1);
+	    	$scope.title="";
+			$scope.content=""; 
+			$scope.regdate="";
+			}
     	}, function errorCallback(response) {
     		alert("실패");
     	});
@@ -85,11 +90,44 @@ noticeModule.controller('notice-controller', function ($scope, $http) {
     }
     
     $scope.btnDelClicked = function(){
-    	var cnt=0;
+    	var codes =[];
     	for(var i=0; i<$scope.list.length; i++)
     		if($scope.list[i].isChecked)
-    			cnt++;
-    	alert(cnt);
+    			//codes[i]=($scope.list[i].code);  //이건 왜 안되는건지 이해해봐!
+    			codes.push($scope.list[i].code);
+    	
+    	$http({
+    		method : 'POST',
+    		url : '../../../../customer/noticeDelAjax',
+    		data : codes
+    		
+    	}).then(function successCallback(response) {
+    		if(response.data == "ok")
+    	    {
+    			$http({
+    				method : 'GET',
+    				url : '../../../../customer/noticeJSON?p=1'
+    			}).then(function successCallback(response) {
+    				$scope.list = response.data;
+    				for(var i=0; i<$scope.list.length; i++)
+    					$scope.list[i].isChecked=false;
+    				$scope.regcode=""+(parseInt($scope.list[0].code)+1);
+    					
+    			}, function errorCallback(response) {
+    				alert("실패");
+    			});    			
+    	   	}
+    	}, function errorCallback(response) {
+    		alert("실패");
+    	});
+    }
+    
+    $scope.allCheckClick = function(){
+    	for(var i=0; i<$scope.list.length; i++)
+    		if($scope.allCheck)
+    			$scope.list[i].isChecked = true;
+    		else
+    			$scope.list[i].isChecked = false;	
     }
     
 });

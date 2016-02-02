@@ -3,6 +3,7 @@ package com.newlec.webprj.controllers;
 import java.io.PrintWriter;
 import java.security.Principal;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.gson.Gson;
 import com.newlec.webprj.dao.NoticeDao;
 import com.newlec.webprj.dao.mybatis.MyBatisNoticeDao;
 import com.newlec.webprj.vo.Notice;
@@ -105,21 +107,29 @@ public class CustomerController {
 			page = Integer.parseInt(p);
 		
 		List<Notice> list = noticeDao.getNotices(page, "TITLE", "");
+		//List<Notice> list2 = noticeDao.getNotices(page, "TITLE", "");
 		
-		StringBuilder builder = new StringBuilder();
+		
+		//List array = new ArrayList<List>();
+		//array.add(list);
+		//array.add(list2);
+		
+		Gson gson = new Gson();
+		//gson.toJson(list2);
+		out.println(gson.toJson(list));
+		
+		/*StringBuilder builder = new StringBuilder();
 		builder.append("[");
-		
 		int size = list.size();
 		for (int i = 0; i < list.size(); i++) {
 			Notice n = list.get(i);
+			//builder.append(gson.toJson(n));
 			builder.append(
 				String.format("{\"code\":\"%s\", \"title\":\"%s\", \"writer\":\"%s\", \"regdate\":\"%s\", \"hit\":\"%s\"}"
 							, n.getCode(), n.getTitle(), n.getWriter(), n.getRegDate(), n.getHit()));
 			if (i < size-1)
 				builder.append(", ");		
 		}
-		
-		
 		builder.append("]");
 		
 		try{
@@ -128,7 +138,7 @@ public class CustomerController {
 			e.printStackTrace();
 		}
 		
-		out.println(builder.toString());
+		out.println(builder.toString());*/
 	
 	}
 	
@@ -201,12 +211,27 @@ public class CustomerController {
 		return "customer/noticeEdit";
 	}
 	
+	@RequestMapping("noticeDelAjax")
+	public void noticeDelAjax(@RequestBody String[] codes, PrintWriter out)
+	{
+		int result = 0;
+		for(int i=0;i<codes.length;i++)
+		 result += noticeDao.delete(codes[i]);
+		
+		if(result == codes.length)
+			out.write("ok");
+		else
+			out.write("error");
+	}
+	
 	@RequestMapping("noticeDel")
 	public String noticeDel(String c){
 		
 		noticeDao.delete(c);
 		return "redirect:notice";
 	}
+	
+	
 	
 	
 }

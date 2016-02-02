@@ -5,9 +5,86 @@
     <title>전문 프로그래머들을 위한 프로그래밍 강좌 사이트 www.newlecture.com</title>
     <link href="../css/customer/layout.css" rel="stylesheet" />
     <link href="../css/customer/notice.css" rel="stylesheet" type="text/css" />
-    <script src="/Content/js/extensions.js"></script>
     
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"/></script>    
+    <style>
+		@keyframes notice-show{
+			from{
+				height:2px;
+				opacity:0;
+			}
+			50%{
+				height:397px;
+				opacity:0;
+			}
+			to{
+				height:397px;
+				opacity:1;
+			}
+		}
+		@keyframes notice-hide{
+			from{
+				height:397px;
+				opacity:1;
+			}
+			50%{
+				height:397px;
+				opacity:0;
+			}
+			to{
+				height:2px;
+				opacity:0;
+			}
+		}   
+		
+		/*내가 정의된 클래스 명을 이용한 애니매이션*/
+		.notice-reg.on{
+			animation:notice-show 1s linear;
+	    }
+	    	
+    	.notice-reg.off{
+    		animation:notice-hide 1s linear;
+    	}  
+    	
+    	/*미리 정의된 클래스 명을 이용한 애니매이션 */
+    	/* .notice-reg{
+				animation:notice-show 1s linear;
+	    	}
+	    	
+    	.notice-reg.ng-hide{
+    		animation:notice-hide 1s linear;
+    	}  */
+     
+   		 /* 공지사항 등록 애니메이션을 위한 스타일 */
+    	/* .notice-reg{
+    		transition:all 1s linear;
+    		opacity:1;
+    	} */
+    	
+    	.notice-reg.ng-hide{
+    		opacity:0;
+    	}
+    
+    	/* 공지사항 목록 애니메이션을 위한 스타일 */
+    	.board-list .ng-enter
+    	{
+    		transition:all 2s linear;
+    		opacity:0;
+    	}
+    	
+    	.board-list .ng-enter-stagger
+    	{
+    		transition-delay: 0.1s;
+    		transition-duration: 0s;
+    	}
+    	
+    	.board-list .ng-enter-active{
+    	opacity:1;
+    	}
+    </style>
+    
+    <script src="/Content/js/extensions.js"></script>  
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"/></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.min.js"></script>  
     <script src="../controllers/notice-controller.js"></script>
 
 </head>
@@ -107,7 +184,7 @@
                     </ol>
                 </div>
 
-                <div ng-show="noticeRegVisible">
+                <div class="notice-reg" ng-class="{on:noticeRegVisible, off:!noticeRegVisible}" ng-show="noticeRegVisible">
                     <h3 class="hidden">공지사항 등록 폼</h3>
                     <form class="main-body-margin-v-top">
                         <fieldset>
@@ -132,10 +209,6 @@
                                         <td>
                                             <textarea ng-model="content"></textarea>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <th>작성일</th>
-                                        <td ng-bind="regdate"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -169,12 +242,21 @@
                         </fieldset>
                     </form>
                 </div>
+                
+                <!-- angularJS filter기능 -->
+                <div class="main-body-margin-v">
+                	가격:{{(12345.6789|number:'':3) + ' 원'}}
+                	<!-- 두번째 방법-------- 가격:{{12345.6789|currency:'':3}} 원 -->
+                </div>
+                <div class="main-body-margin-v">
+                	가격:{{123456789|date:"yyyy-MM-dd 'at' h:mma"}}
+                </div>
 
                 <h3 class="hidden">공지사항 목록</h3>
                 <table class="board board-list main-body-margin-v">
                     <thead>
                         <tr>
-                            <th class="col-width-mostnarrow"><input type="checkbox" ng-model="allCheck"/></th>
+                            <th class="col-width-mostnarrow"><input type="checkbox" ng-model="allCheck" ng-click="allCheckClick()"/></th>
                             <th class="col-width-narrow">번호</th>
                             <th>제목</th>
                             <th class="col-width-normal">작성자</th>
@@ -186,10 +268,10 @@
                         <tr ng-repeat="n in list">
                             <td class="col-width-mostnarrow"><input type="checkbox" ng-checked="allCheck" ng-model="n.isChecked"/></td>
                             <td class="col-width-narrow" ng-bind="n.code">${n.code}</td>
-                            <td class="col-align-left col-indent col-ellipsis"><img ng-src="../images/{{n.img}}"><a href="" ng-bind="n.title">${n.title}</a></td>
-                            <td class="col-width-normal" ng-bind="n.writer">${n.writer}</td>
-                            <td class="col-width-normal" ng-bind="n.regdate">${n.regdate}</td>
-                            <td class="col-width-mostnarrow" ng-bind="n.hit">${n.hit}</td>
+                            <td class="col-align-left col-indent col-ellipsis"><img ng-src="../images/{{n.img}}"><a href="" ng-bind="n.title|uppercase|limitTo:2">${n.title}</a></td>
+                            <td class="col-width-normal" ng-bind="n.writer | uppercase">${n.writer}</td>
+                            <td class="col-width-normal" ng-bind="n.regDate | date:'MM/dd/yyyy'">${n.regdate}</td>
+                            <td class="col-width-mostnarrow" ng-bind="n.hit | currency">${n.hit}</td>
                         </tr>
                     </tbody>
                 </table>
