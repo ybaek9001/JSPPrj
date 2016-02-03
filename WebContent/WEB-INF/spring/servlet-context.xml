@@ -38,10 +38,18 @@
 	</bean>    
     
     <!-- resolver : 찾아주는 애들 / viewResolver : 뷰 찾아주는 애들 -->
+
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"/>
 		<property name="suffix" value=".jsp"/>
 		<!-- 우선순위 설정 -->
 		<property name="order" value="2"/>
 	</bean>
+	
+	<bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+         
+        <!-- setting maximum upload size -->
+        <property name="maxUploadSize" value="1000000" />
+    </bean>
 </beans>

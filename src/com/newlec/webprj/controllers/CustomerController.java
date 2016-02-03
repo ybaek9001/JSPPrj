@@ -1,11 +1,14 @@
 package com.newlec.webprj.controllers;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.Principal;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -16,10 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.newlec.webprj.dao.NoticeDao;
-import com.newlec.webprj.dao.mybatis.MyBatisNoticeDao;
 import com.newlec.webprj.vo.Notice;
 
 @Controller
@@ -232,6 +236,37 @@ public class CustomerController {
 	}
 	
 	
+	//단일 파일 업로드를 위한 서버 코드 with 스프링
+	@RequestMapping(value = "upload", method = RequestMethod.POST)
+	public @ResponseBody String upload(@RequestParam("notice-title")String titleTitle,
+			MultipartFile file, HttpServletRequest request) throws IOException{	//@ResponseBody 리턴타입이 view를 불러오는 스트링이 아니기 때문에
+		
+		
+		//파일을 저장할 디렉토리와 경로 설정
+		ServletContext context = request.getServletContext();
+		String rootPath = context.getRealPath("/customer")+"\\upload";
+		
+		File f = new File(rootPath);
+		if (!f.exists()) {
+			if (f.mkdir()) {
+				System.out.println("Directory is created!!");
+			} else {
+				System.out.println("Failed to create directory!");
+			}
+		}
+	    
+		//전송된 파일을 저장하는 로직
+		String fileName = file.getOriginalFilename();
+		byte[] buf = file.getBytes();
+		
+		//저장할 파일이 있는지 없는지 검사를 해야만 하지만 수업에서 생략했음
+		FileOutputStream fout = new FileOutputStream(rootPath+File.separator+fileName); //File.separator == "\\"
+		fout.write(buf);
+		fout.close();
+		
+		return "You successfully uploaded file=" + rootPath+File.separator+fileName;
+		//return "redirect:../content/javascript/app/views/fileupload.html";
+	}
 	
 	
 }
