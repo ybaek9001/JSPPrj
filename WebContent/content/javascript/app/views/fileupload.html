@@ -32,6 +32,10 @@
 	</form>
 	<hr>
 	<h2>드래그 드롭 파일 업로드</h2>
-	<div class="dropbox" ng-bind="dropboxText"></div>
+	<div class="dropbox" ng-bind="dropboxText" ng-class="dropboxClass"></div>
+	<ul>
+		<li ng-repeat="f in files" ng-bind="f.name"></li>
+	</ul>
+	<div><input type="button" value="전송"/></div>
 </body>
 </html>
