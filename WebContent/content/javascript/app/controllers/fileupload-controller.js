@@ -20,6 +20,9 @@ fileuploadModule.controller('fileupload-controller', function ($scope, $http) {
 	*/
 	
 	var dropbox = document.querySelector(".dropbox");
+	//처리되는 순서: dragenter->dragover->drop(or dragleave)
+						
+	
 	dropbox.addEventListener("dragenter",function(event){
 		event.stopPropagation();
 		event.preventDefault();
@@ -36,7 +39,7 @@ fileuploadModule.controller('fileupload-controller', function ($scope, $http) {
 		event.preventDefault();
 		
 		$scope.$apply(function(){
-			$scope.dropboxText = "여기에 업로드할 파일을 둠~~";
+			$scope.dropboxText = "여기에 업로드할 파일을 두세요~~!!!!!!!!!!!!!!!";
 			$scope.dropboxClass="";
 		});
 		
@@ -47,13 +50,14 @@ fileuploadModule.controller('fileupload-controller', function ($scope, $http) {
 		event.stopPropagation();
 		event.preventDefault();
 		
-		var valid = event.dataTransfer 
-					&& event.dataTransfer.types 
-					&& event.dataTransfer.types.indexOf("Files")>=0; //  >0 는 조건은 있으면이란 의미
+		var valid = event.dataTransfer	//dataTransfer객체는 drag & drop 이벤트에서 사용할 수 있음 
+					&& event.dataTransfer.types //types를 가지는  이벤트 객체있가 drag & drop이벤트 중인 지 확인
+					&& event.dataTransfer.types.indexOf("Files")>=0; //  "Files"라는 타입이 인벤트 객체 안에 들어 있는지 확인
 		$scope.$apply(function(){
 			//$scope.dropboxText = event.dataTransfer.types;
 			$scope.dropboxText = valid? "드롭하세요!": "유효한 파일이 아닙니다~~";
-			$scope.dropboxClass = valid? "valid":"invalid";		
+			$scope.dropboxClass = valid? "valid":"invalid";	
+			//	ng-class="valid" 혹은 "invalid"로 되는데, 이것은 class="valid"라고 한 것처럼 자바스크립트나 css에서 적용되는 class로도 사용가능
 		});
 		//dropbox.innerText = "오케이";
 	});
@@ -67,8 +71,8 @@ fileuploadModule.controller('fileupload-controller', function ($scope, $http) {
 		})
 		
 		//alert(files.length)
-		var str ="";
+		/*var str ="";
 		for(var i=0;i<files.length;i++)
-			alert(files[i].name);
+			alert(files[i].name);*/
 	});	
 });
